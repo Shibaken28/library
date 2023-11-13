@@ -10,3 +10,5 @@ if [ $# -ne 1 ]; then
 fi
 
 oj-bundle $1 | iconv -t sjis | clip.exe
+oj-bundle $1 | iconv -t sjis > random.cpp
+make random

@@ -1,99 +1,148 @@
-#line 1 "Graph/LCA.test.cpp"
-# define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_5_C"
+#line 1 "Math/Linear/Matrix.test.cpp"
+# define PROBLEM "https://judge.yosupo.jp/problem/matrix_product"
+using namespace std;
 # include <iostream>
-#line 1 "Graph/LCA.hpp"
+#line 1 "Math/Mod/mint.hpp"
+// modint: mod åvéZÇ int ÇàµÇ§ÇÊÇ§Ç…àµÇ¶ÇÈç\ë¢ëÃ
+template<int MOD> struct Fp {
+    long long val;
+    constexpr Fp(long long v = 0) noexcept : val(v % MOD) {
+        if (val < 0) val += MOD;
+    }
+    constexpr int getmod() { return MOD; }
+    constexpr Fp operator - () const noexcept {
+        return val ? MOD - val : 0;
+    }
+    constexpr Fp operator + (const Fp& r) const noexcept { return Fp(*this) += r; }
+    constexpr Fp operator - (const Fp& r) const noexcept { return Fp(*this) -= r; }
+    constexpr Fp operator * (const Fp& r) const noexcept { return Fp(*this) *= r; }
+    constexpr Fp operator / (const Fp& r) const noexcept { return Fp(*this) /= r; }
+    constexpr Fp& operator += (const Fp& r) noexcept {
+        val += r.val;
+        if (val >= MOD) val -= MOD;
+        return *this;
+    }
+    constexpr Fp& operator -= (const Fp& r) noexcept {
+        val -= r.val;
+        if (val < 0) val += MOD;
+        return *this;
+    }
+    constexpr Fp& operator *= (const Fp& r) noexcept {
+        val = val * r.val % MOD;
+        return *this;
+    }
+    constexpr Fp& operator /= (const Fp& r) noexcept {
+        long long a = r.val, b = MOD, u = 1, v = 0;
+        while (b) {
+            long long t = a / b;
+            a -= t * b; swap(a, b);
+            u -= t * v; swap(u, v);
+        }
+        val = val * u % MOD;
+        if (val < 0) val += MOD;
+        return *this;
+    }
+    constexpr bool operator == (const Fp& r) const noexcept {
+        return this->val == r.val;
+    }
+    constexpr bool operator != (const Fp& r) const noexcept {
+        return this->val != r.val;
+    }
+    friend constexpr ostream& operator << (ostream &os, const Fp<MOD>& x) noexcept {
+        return os << x.val;
+    }
+    friend constexpr Fp<MOD> modpow(const Fp<MOD> &a, long long n) noexcept {
+        if (n == 0) return 1;
+        auto t = modpow(a, n / 2);
+        t = t * t;
+        if (n & 1) t = t * a;
+        return t;
+    }
+};
+
+#line 1 "Math/Linear/Matrix.hpp"
 # include <vector>
+#line 3 "Math/Linear/Matrix.hpp"
 using namespace std;
 
-
-struct Edge{
-    int to;
+// matrix
+template<class T> struct Matrix {
+    vector<vector<T> > val;
+    Matrix(int n = 1, int m = 1, T v = 0) : val(n, vector<T>(m, v)) {}
+    void init(int n, int m, T v = 0) {val.assign(n, vector<T>(m, v));}
+    void resize(int n, int m) {
+        val.resize(n);
+        for (int i = 0; i < n; ++i) val[i].resize(m);
+    }
+    Matrix<T>& operator = (const Matrix<T> &A) {
+        val = A.val;
+        return *this;
+    }
+    size_t size() const {return val.size();}
+    vector<T>& operator [] (int i) {return val[i];}
+    const vector<T>& operator [] (int i) const {return val[i];}
 };
 
-using Graph = vector<vector<Edge>>;
+template<class T> Matrix<T> operator * (const Matrix<T> &A, const Matrix<T> &B) {
+    Matrix<T> R(A.size(), B[0].size());
+    for (int i = 0; i < A.size(); ++i)
+        for (int j = 0; j < B[0].size(); ++j)
+            for (int k = 0; k < B.size(); ++k)
+                R[i][j] += A[i][k] * B[k][j];
+    return R;
+}
 
-struct LCA{
-    Graph G;
-    vector<vector<int>> ancestor;
-    //ancestor[i][j]:=È†ÇÁÇπi„ÅÆ2^jÂÄãË¶™
-    vector<int> depth;//Ê∑±„Åï
-    int N;
-    int root = 0;
-    const int maxDepth = 25;
-    LCA(int _N){
-        this-> N = _N;
-        init();
+template<class T> Matrix<T> pow(const Matrix<T> &A, long long n) {
+    Matrix<T> R(A.size(), A.size());
+    auto B = A;
+    for (int i = 0; i < A.size(); ++i) R[i][i] = 1;
+    while (n > 0) {
+        if (n & 1) R = R * B;
+        B = B * B;
+        n >>= 1;
     }
-    void init(){
-        G.resize(N);
-        depth.resize(N);
-        ancestor.resize(N);
-        for(int i=0;i<N;i++){
-            ancestor[i].resize(maxDepth);
-        }
-    }
-    void build(){
-        ancestor[root][0] = root;
-        bfs(root,root,0);
-        for(int i=1;i<maxDepth;i++){
-            for(int j=0;j<N;j++){
-                ancestor[j][i] = ancestor[ancestor[j][i-1]][i-1];
-            }
-        }
-    }
-    void bfs(int n,int pre,int d){
-        depth[n] = d;
-        ancestor[n][0] = pre;
-        for(auto&E:G[n]){
-            if(E.to==pre)continue;
-            bfs(E.to,n,d+1);
-        }
-    }
-    //È†ÇÁÇπn„ÅÆsÂÄãÂÖà„ÅÆÁ•ñÂÖà
-    int anc(int n,int s){
-        for(int i=0;i<maxDepth;i++){
-            if(s&(1<<i)){
-                n = ancestor[n][i];
-            }
-        }
-        return n;
-    }
-    //È†ÇÁÇπn„ÅÆÊ∑±„Åïs(root=0)„ÅÆÁ•ñÂÖà
-    int levelAnc(int n,int s){
-        return anc(n,depth[n]-s);
-    }
-    //È†ÇÁÇπa,b„ÅÆÂÖ±ÈÄöÊúÄËøëÁ•ñÂÖà
-    int lca(int a,int b){
-        if(depth[a]<depth[b])swap(a,b);
-        a = levelAnc(a,depth[b]);//Âêå„ÅòÊ∑±„Åï„Å´„Åô„Çã
-        if(a==b)return a;
-        for(int k=maxDepth-1;k>=0;k--){
-            if(ancestor[a][k]!=ancestor[b][k]){
-                a = ancestor[a][k];
-                b = ancestor[b][k];
-            }
-        }
-        return ancestor[a][0];
-    }
-};
-#line 4 "Graph/LCA.test.cpp"
-using namespace std;
+    return R;
+}
+
+template<class T> vector<T> operator * (const Matrix<T> &A, const vector<T> &B) {
+    vector<T> v(A.size());
+    for (int i = 0; i < A.size(); ++i)
+        for (int k = 0; k < B.size(); ++k)
+            v[i] += A[i][k] * B[k];
+    return v;
+}
+
+template<class T> Matrix<T> operator + (const Matrix<T> &A, const Matrix<T> &B) {
+    Matrix<T> R(A.size(), A[0].size());
+    for (int i = 0; i < A.size(); ++i)
+        for (int j = 0; j < A[0].size(); ++j)
+            R[i][j] = A[i][j] + B[i][j];
+    return R;
+}
+
+template<class T> Matrix<T> operator - (const Matrix<T> &A, const Matrix<T> &B) {
+    Matrix<T> R(A.size(), A[0].size());
+    for (int i = 0; i < A.size(); ++i)
+        for (int j = 0; j < A[0].size(); ++j)
+            R[i][j] = A[i][j] - B[i][j];
+    return R;
+}
+
+#line 6 "Math/Linear/Matrix.test.cpp"
+
+using mint = Fp<998244353>;
 
 int main(){
-    int n;cin>>n;
-    LCA lca(n);
-    for(int i=0;i<n;i++){
-        int k;cin>>k;
-        for(int j=0;j<k;j++){
-            int c;cin>>c;
-            lca.G[c].push_back({i});
-            lca.G[i].push_back({c});
+    int n,m,k;cin>>n>>m>>k;
+    Matrix<mint> A(n,m),B(m,k);
+    for(int i=0;i<n;++i)for(int j=0;j<m;++j)cin>>A.val[i][j].val;
+    for(int i=0;i<m;++i)for(int j=0;j<k;++j)cin>>B.val[i][j].val;
+    auto C=A*B;
+    for(int i=0;i<n;++i){
+        for(int j=0;j<k;++j){
+            cout<<(j?" ":"")<<C.val[i][j].val;
         }
+        cout<<endl;
     }
-    lca.build();
-    int q;cin>>q;
-    for(int i=0;i<q;i++){
-        int u,v;cin>>u>>v;
-        cout<<lca.lca(u,v)<<endl;
-    }
+    return 0;
 }
