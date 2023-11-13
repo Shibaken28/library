@@ -6,6 +6,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: Math/Combination/combination.test.cpp
     title: Math/Combination/combination.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: Math/Linear/Matrix.test.cpp
+    title: Math/Linear/Matrix.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -72,6 +75,7 @@ data:
   timestamp: '2023-11-13 15:54:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - Math/Linear/Matrix.test.cpp
   - Math/Combination/combination.test.cpp
 documentation_of: Math/Mod/mint.hpp
 layout: document

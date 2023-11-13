@@ -9,6 +9,18 @@ data:
   - name: Graph
     pages:
     - icon: ':heavy_check_mark:'
+      path: Graph/Bellman-Ford.hpp
+      title: "Bellman-Ford algorithm / \u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\
+        \u6CD5\u306B\u3088\u308B\u6700\u77ED\u7D4C"
+    - icon: ':heavy_check_mark:'
+      path: Graph/Dijkstra.hpp
+      title: "Dijkstra's algorithm / \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\u306B\
+        \u3088\u308B\u6700\u77ED\u7D4C\u8DEF"
+    - icon: ':heavy_check_mark:'
+      path: Graph/Floyd-Warshall.hpp
+      title: "Floyd-Warshall algorithm / \u30D5\u30ED\u30A4\u30C9\u30EF\u30FC\u30B7\
+        \u30E3\u30EB\u6CD5\u306B\u3088\u308B\u5168\u70B9\u5BFE\u6700\u77ED\u7D4C\u8DEF"
+    - icon: ':heavy_check_mark:'
       path: Graph/Kruskal.hpp
       title: "Kruskal's algorithm / \u30AF\u30E9\u30B9\u30AB\u30EB\u6CD5\u306B\u3088\
         \u308B\u6700\u5C0F\u5168\u57DF\u6728"
@@ -27,6 +39,11 @@ data:
       path: Math/Combination/pascal.hpp
       title: "Pascal's triangle / \u30D1\u30B9\u30AB\u30EB\u306E\u4E09\u89D2\u5F62\
         \u306B\u3088\u308B\u4E8C\u9805\u4FC2\u6570\u306E\u8A08\u7B97"
+  - name: Math/Linear
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: Math/Linear/Matrix.hpp
+      title: "Matrix / \u884C\u5217"
   - name: Math/Mod
     pages:
     - icon: ':warning:'
@@ -92,6 +109,15 @@ data:
   - name: Graph
     pages:
     - icon: ':heavy_check_mark:'
+      path: Graph/Bellman-Ford.test.cpp
+      title: Graph/Bellman-Ford.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Graph/Dijkstra.test.cpp
+      title: Graph/Dijkstra.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Graph/Floyd-Warshall.test.cpp
+      title: Graph/Floyd-Warshall.test.cpp
+    - icon: ':heavy_check_mark:'
       path: Graph/Kruskal.test.cpp
       title: Graph/Kruskal.test.cpp
     - icon: ':heavy_check_mark:'
@@ -105,6 +131,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: Math/Combination/combination.test.cpp
       title: Math/Combination/combination.test.cpp
+  - name: Math/Linear
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: Math/Linear/Matrix.test.cpp
+      title: Math/Linear/Matrix.test.cpp
   - name: Math/Mod
     pages:
     - icon: ':heavy_check_mark:'

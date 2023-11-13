@@ -1,6 +1,10 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: Math/Number-Theory/ext-euclid.hpp
+    title: "Extended Euclidean algorithm / \u62E1\u5F35\u30E6\u30FC\u30AF\u30EA\u30C3\
+      \u30C9\u306E\u4E92\u9664\u6CD5"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -8,26 +12,22 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.0/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
-    , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
-    \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.0/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
-    , line 187, in bundle\n    bundler.update(path)\n  File \"/opt/hostedtoolcache/Python/3.12.0/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
-    , line 401, in update\n    self.update(self._resolve(pathlib.Path(included), included_from=path))\n\
-    \                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n \
-    \ File \"/opt/hostedtoolcache/Python/3.12.0/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
-    , line 260, in _resolve\n    raise BundleErrorAt(path, -1, \"no such header\"\
-    )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: ../Math/Number-Theory/ext-euclid.hpp:\
-    \ line -1: no such header\n"
-  code: "# include \"../Math/Number-Theory/ext-euclid.hpp\"\n\n// \u9006\u5143 a^{-1}\
-    \ mod m\nlong modinv(long a,long m){\n    long x,y;\n    extGCD(a,m,x,y);\n  \
-    \  return (m+x%m)%m;\n}"
-  dependsOn: []
+  bundledCode: "#line 1 \"Math/Number-Theory/ext-euclid.hpp\"\n// \u62E1\u5F35Euclid\u306E\
+    \u4E92\u9664\u6CD5\n// ax + by = gcd(a, b) \u3068\u306A\u308B\u3088\u3046\u306A\
+    \ (x, y) \u3092\u6C42\u3081\u308B \nlong extGCD(long a, long b, long &x, long\
+    \ &y) {\n    if (b == 0) {\n        x = 1;\n        y = 0;\n        return a;\n\
+    \    }\n    long d = extGCD(b, a%b, y, x);\n    y -= a/b * x;\n    return d;\n\
+    }\n#line 2 \"Math/Mod/inverse.hpp\"\n\n// \u9006\u5143 a^{-1} mod m\nlong modinv(long\
+    \ a,long m){\n    long x,y;\n    extGCD(a,m,x,y);\n    return (m+x%m)%m;\n}\n"
+  code: "# include \"../Number-Theory/ext-euclid.hpp\"\n\n// \u9006\u5143 a^{-1} mod\
+    \ m\nlong modinv(long a,long m){\n    long x,y;\n    extGCD(a,m,x,y);\n    return\
+    \ (m+x%m)%m;\n}"
+  dependsOn:
+  - Math/Number-Theory/ext-euclid.hpp
   isVerificationFile: false
   path: Math/Mod/inverse.hpp
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-11-14 01:12:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Math/Mod/inverse.hpp

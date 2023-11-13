@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: Math/Mod/inverse.hpp
+    title: "inverse / \u9006\u5143"
   - icon: ':heavy_check_mark:'
     path: Math/Number-Theory/CRT.hpp
     title: "Chinese Remainder Theorem / \u4E2D\u56FD\u5270\u4F59\u5B9A\u7406"
@@ -33,6 +36,7 @@ data:
   path: Math/Number-Theory/ext-euclid.hpp
   requiredBy:
   - Math/Number-Theory/CRT.hpp
+  - Math/Mod/inverse.hpp
   timestamp: '2023-11-13 23:35:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
