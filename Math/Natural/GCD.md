@@ -1,6 +1,6 @@
 ---
 title: GCD, LCM / 最大公約数と最小公倍数
-documentation_of: ./add.hpp
+documentation_of: ./GCD.hpp
 ---
 
 ## 概要
