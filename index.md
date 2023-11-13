@@ -16,6 +16,9 @@ data:
       title: "power(mod) / \u3079\u304D\u4E57(mod)"
   - name: Math/Number-Theory
     pages:
+    - icon: ':x:'
+      path: Math/Number-Theory/CRT.hpp
+      title: "Chinese Remainder Theorem / \u4E2D\u56FD\u5270\u4F59\u5B9A\u7406"
     - icon: ':heavy_check_mark:'
       path: Math/Number-Theory/GCD.hpp
       title: "GCD, LCM / \u6700\u5927\u516C\u7D04\u6570\u3068\u6700\u5C0F\u516C\u500D\
@@ -30,7 +33,7 @@ data:
       path: Math/Number-Theory/euler.hpp
       title: "Euler's Phi Function / \u30AA\u30A4\u30E9\u30FC\u306E\u30D5\u30A1\u30A4\
         \u95A2\u6570"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Math/Number-Theory/ext-euclid.hpp
       title: "Extended Euclidean algorithm / \u62E1\u5F35\u30E6\u30FC\u30AF\u30EA\u30C3\
         \u30C9\u306E\u4E92\u9664\u6CD5"
@@ -69,6 +72,9 @@ data:
       title: Math/Mod/modpow.test.cpp
   - name: Math/Number-Theory
     pages:
+    - icon: ':x:'
+      path: Math/Number-Theory/CRT.test.cpp
+      title: Math/Number-Theory/CRT.test.cpp
     - icon: ':heavy_check_mark:'
       path: Math/Number-Theory/GCD.test.cpp
       title: Math/Number-Theory/GCD.test.cpp
