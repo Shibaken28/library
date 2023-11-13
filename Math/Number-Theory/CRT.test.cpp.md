@@ -1,18 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Math/Number-Theory/CRT.hpp
     title: "Chinese Remainder Theorem / \u4E2D\u56FD\u5270\u4F59\u5B9A\u7406"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
+    path: Math/Number-Theory/GCD.hpp
+    title: "GCD, LCM / \u6700\u5927\u516C\u7D04\u6570\u3068\u6700\u5C0F\u516C\u500D\
+      \u6570"
+  - icon: ':heavy_check_mark:'
     path: Math/Number-Theory/ext-euclid.hpp
     title: "Extended Euclidean algorithm / \u62E1\u5F35\u30E6\u30FC\u30AF\u30EA\u30C3\
       \u30C9\u306E\u4E92\u9664\u6CD5"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/447
@@ -25,7 +29,7 @@ data:
     \u3046\u306A (x, y) \u3092\u6C42\u3081\u308B \nlong extGCD(long a, long b, long\
     \ &x, long &y) {\n    if (b == 0) {\n        x = 1;\n        y = 0;\n        return\
     \ a;\n    }\n    long d = extGCD(b, a%b, y, x);\n    y -= a/b * x;\n    return\
-    \ d;\n}\n\n#line 4 \"Math/Number-Theory/CRT.hpp\"\nusing namespace std;\n\nlong\
+    \ d;\n}\n#line 4 \"Math/Number-Theory/CRT.hpp\"\nusing namespace std;\n\nlong\
     \ mod(long a,long m){\n    if(a>=0)return a%m; \n    return (m-(-a)%m)%m;\n}\n\
     \n/*\n\u4E2D\u56FD\u5270\u4F59\u5B9A\u7406\n*/\nbool CRT(long b1, long m1, long\
     \ b2, long m2,long &r,long &m) {\n    long p, q;\n    long d = extGCD(m1, m2,\
@@ -35,25 +39,35 @@ data:
     \ &m) {\n    int s = X.size();\n    r = X.front().first;\n    m = X.front().second;\n\
     \    bool ok = true;\n    for(int i=1;i<s;i++){\n        ok = CRT(r,m,X[i].first,X[i].second,r,m);\n\
     \        if(!ok){\n            break;\n        }\n    }\n    return ok;\n}\n\n\
-    #line 4 \"Math/Number-Theory/CRT.test.cpp\"\nusing namespace std;\n\nint main(){\n\
+    #line 2 \"Math/Number-Theory/GCD.hpp\"\nusing namespace std;\n\nlong GCD(long\
+    \ a,long b){\n    if(a<b)return GCD(b,a);\n    if(b==0)return a;\n    return GCD(b,a%b);\n\
+    }\n\nlong GCD(vector<long>&A){\n    long gcd = A.front();\n    for(auto&a:A)gcd\
+    \ = GCD(gcd,a);\n    return gcd;\n}\n\nlong LCM(long a,long b){\n    return (a/GCD(a,b))*b;\n\
+    }\n\n\nlong LCM(vector<long>&A){\n    long lcm = 1;\n    for(auto&a:A)lcm = LCM(lcm,a);\n\
+    \    return lcm;\n}\n\n#line 5 \"Math/Number-Theory/CRT.test.cpp\"\nusing namespace\
+    \ std;\n\nint main(){\n    int N = 3;\n    vector<pair<long,long>> X(N);\n   \
+    \ for(int i=0;i<N;i++){\n        cin >> X[i].first >> X[i].second;\n    }\n  \
+    \  long r,m;\n    bool ok = CRT(X,r,m);\n    if(ok){\n        if(r==0){\n    \
+    \        vector<long> A = {X[0].second,X[1].second,X[2].second};\n           \
+    \ cout << LCM(A) << endl;\n        }else{\n            cout << r << endl;\n  \
+    \      }\n    }else{\n        cout << -1 << endl;\n    }\n    return 0;\n}\n"
+  code: "# define PROBLEM \"https://yukicoder.me/problems/447\"\n# include <iostream>\n\
+    # include \"CRT.hpp\"\n# include \"GCD.hpp\"\nusing namespace std;\n\nint main(){\n\
     \    int N = 3;\n    vector<pair<long,long>> X(N);\n    for(int i=0;i<N;i++){\n\
     \        cin >> X[i].first >> X[i].second;\n    }\n    long r,m;\n    bool ok\
-    \ = CRT(X,r,m);\n    if(ok){\n        cout << r << endl;\n    }else{\n       \
-    \ cout << -1 << endl;\n    }\n    return 0;\n}\n"
-  code: "# define PROBLEM \"https://yukicoder.me/problems/447\"\n# include <iostream>\n\
-    # include \"CRT.hpp\"\nusing namespace std;\n\nint main(){\n    int N = 3;\n \
-    \   vector<pair<long,long>> X(N);\n    for(int i=0;i<N;i++){\n        cin >> X[i].first\
-    \ >> X[i].second;\n    }\n    long r,m;\n    bool ok = CRT(X,r,m);\n    if(ok){\n\
-    \        cout << r << endl;\n    }else{\n        cout << -1 << endl;\n    }\n\
-    \    return 0;\n}"
+    \ = CRT(X,r,m);\n    if(ok){\n        if(r==0){\n            vector<long> A =\
+    \ {X[0].second,X[1].second,X[2].second};\n            cout << LCM(A) << endl;\n\
+    \        }else{\n            cout << r << endl;\n        }\n    }else{\n     \
+    \   cout << -1 << endl;\n    }\n    return 0;\n}"
   dependsOn:
   - Math/Number-Theory/CRT.hpp
   - Math/Number-Theory/ext-euclid.hpp
+  - Math/Number-Theory/GCD.hpp
   isVerificationFile: true
   path: Math/Number-Theory/CRT.test.cpp
   requiredBy: []
-  timestamp: '2023-11-13 16:15:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-11-13 23:35:07+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Math/Number-Theory/CRT.test.cpp
 layout: document

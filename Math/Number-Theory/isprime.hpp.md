@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: Math/Number-Theory/enum-prme.test.cpp
+    title: Math/Number-Theory/enum-prme.test.cpp
+  - icon: ':heavy_check_mark:'
     path: Math/Number-Theory/isprime.test.cpp
     title: Math/Number-Theory/isprime.test.cpp
   _isVerificationFailed: false
@@ -25,6 +28,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Math/Number-Theory/isprime.test.cpp
+  - Math/Number-Theory/enum-prme.test.cpp
 documentation_of: Math/Number-Theory/isprime.hpp
 layout: document
 title: "is prime / \u7D20\u6570\u5224\u5B9A"

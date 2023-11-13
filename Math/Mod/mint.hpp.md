@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: Math/Combination/combination.test.cpp
+    title: Math/Combination/combination.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"Math/Mod/mint.hpp\"\n// modint: mod \u8A08\u7B97\u3092 int\
@@ -67,8 +70,9 @@ data:
   path: Math/Mod/mint.hpp
   requiredBy: []
   timestamp: '2023-11-13 15:54:10+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - Math/Combination/combination.test.cpp
 documentation_of: Math/Mod/mint.hpp
 layout: document
 title: "modint / modint\u69CB\u9020\u4F53"

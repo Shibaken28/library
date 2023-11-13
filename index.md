@@ -1,14 +1,38 @@
 ---
 data:
   libraryCategories:
+  - name: Enumerate
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: Enumerate/permutations.hpp
+      title: "enumerate permutations / \u9806\u5217\u5217\u6319"
   - name: Graph
     pages:
     - icon: ':heavy_check_mark:'
+      path: Graph/Kruskal.hpp
+      title: "Kruskal's algorithm / \u30AF\u30E9\u30B9\u30AB\u30EB\u6CD5\u306B\u3088\
+        \u308B\u6700\u5C0F\u5168\u57DF\u6728"
+    - icon: ':heavy_check_mark:'
+      path: Graph/LCA.hpp
+      title: "Lowest Common Ancestor / \u6700\u5C0F\u5171\u901A\u7956\u5148"
+    - icon: ':heavy_check_mark:'
       path: Graph/UnionFind.hpp
       title: UnionFind
+  - name: Math/Combination
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: Math/Combination/combination.hpp
+      title: Math/Combination/combination.hpp
+    - icon: ':warning:'
+      path: Math/Combination/pascal.hpp
+      title: "Pascal's triangle / \u30D1\u30B9\u30AB\u30EB\u306E\u4E09\u89D2\u5F62\
+        \u306B\u3088\u308B\u4E8C\u9805\u4FC2\u6570\u306E\u8A08\u7B97"
   - name: Math/Mod
     pages:
     - icon: ':warning:'
+      path: Math/Mod/inverse.hpp
+      title: "inverse / \u9006\u5143"
+    - icon: ':heavy_check_mark:'
       path: Math/Mod/mint.hpp
       title: "modint / modint\u69CB\u9020\u4F53"
     - icon: ':heavy_check_mark:'
@@ -16,7 +40,7 @@ data:
       title: "power(mod) / \u3079\u304D\u4E57(mod)"
   - name: Math/Number-Theory
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Math/Number-Theory/CRT.hpp
       title: "Chinese Remainder Theorem / \u4E2D\u56FD\u5270\u4F59\u5B9A\u7406"
     - icon: ':heavy_check_mark:'
@@ -26,14 +50,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: Math/Number-Theory/divisor.hpp
       title: "divisors / \u7D04\u6570\u5217\u6319"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: Math/Number-Theory/enum-prime.hpp
       title: "enumerate prime / \u7D20\u6570\u7BE9"
     - icon: ':heavy_check_mark:'
       path: Math/Number-Theory/euler.hpp
       title: "Euler's Phi Function / \u30AA\u30A4\u30E9\u30FC\u306E\u30D5\u30A1\u30A4\
         \u95A2\u6570"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Math/Number-Theory/ext-euclid.hpp
       title: "Extended Euclidean algorithm / \u62E1\u5F35\u30E6\u30FC\u30AF\u30EA\u30C3\
         \u30C9\u306E\u4E92\u9664\u6CD5"
@@ -52,19 +76,35 @@ data:
     pages:
     - icon: ':warning:'
       path: Uncategorized/date.hpp
-      title: "date / 1\u5E741\u67081\u65E5\u304B\u3089\u306E\u65E5\u6570\u3092\u8A08\
-        \u7B97\u3059\u308B"
+      title: "date count / 1\u5E741\u67081\u65E5\u304B\u3089\u306E\u65E5\u6570\u3092\
+        \u8A08\u7B97\u3059\u308B"
   - name: .
     pages:
     - icon: ':warning:'
       path: random.cpp
       title: random.cpp
   verificationCategories:
+  - name: Enumerate
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: Enumerate/permutations.test.cpp
+      title: Enumerate/permutations.test.cpp
   - name: Graph
     pages:
     - icon: ':heavy_check_mark:'
+      path: Graph/Kruskal.test.cpp
+      title: Graph/Kruskal.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Graph/LCA.test.cpp
+      title: Graph/LCA.test.cpp
+    - icon: ':heavy_check_mark:'
       path: Graph/UnionFind.test.cpp
       title: Graph/UnionFind.test.cpp
+  - name: Math/Combination
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: Math/Combination/combination.test.cpp
+      title: Math/Combination/combination.test.cpp
   - name: Math/Mod
     pages:
     - icon: ':heavy_check_mark:'
@@ -72,7 +112,7 @@ data:
       title: Math/Mod/modpow.test.cpp
   - name: Math/Number-Theory
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Math/Number-Theory/CRT.test.cpp
       title: Math/Number-Theory/CRT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -84,6 +124,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: Math/Number-Theory/divisor.test.cpp
       title: Math/Number-Theory/divisor.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Math/Number-Theory/enum-prme.test.cpp
+      title: Math/Number-Theory/enum-prme.test.cpp
     - icon: ':heavy_check_mark:'
       path: Math/Number-Theory/euler.test.cpp
       title: Math/Number-Theory/euler.test.cpp

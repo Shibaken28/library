@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Math/Number-Theory/ext-euclid.hpp
     title: "Extended Euclidean algorithm / \u62E1\u5F35\u30E6\u30FC\u30AF\u30EA\u30C3\
       \u30C9\u306E\u4E92\u9664\u6CD5"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Math/Number-Theory/CRT.test.cpp
     title: Math/Number-Theory/CRT.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"Math/Number-Theory/CRT.hpp\"\n# include <vector>\n# include\
@@ -21,7 +21,7 @@ data:
     \ (x, y) \u3092\u6C42\u3081\u308B \nlong extGCD(long a, long b, long &x, long\
     \ &y) {\n    if (b == 0) {\n        x = 1;\n        y = 0;\n        return a;\n\
     \    }\n    long d = extGCD(b, a%b, y, x);\n    y -= a/b * x;\n    return d;\n\
-    }\n\n#line 4 \"Math/Number-Theory/CRT.hpp\"\nusing namespace std;\n\nlong mod(long\
+    }\n#line 4 \"Math/Number-Theory/CRT.hpp\"\nusing namespace std;\n\nlong mod(long\
     \ a,long m){\n    if(a>=0)return a%m; \n    return (m-(-a)%m)%m;\n}\n\n/*\n\u4E2D\
     \u56FD\u5270\u4F59\u5B9A\u7406\n*/\nbool CRT(long b1, long m1, long b2, long m2,long\
     \ &r,long &m) {\n    long p, q;\n    long d = extGCD(m1, m2, p, q);\n    if ((b2\
@@ -47,8 +47,8 @@ data:
   isVerificationFile: false
   path: Math/Number-Theory/CRT.hpp
   requiredBy: []
-  timestamp: '2023-11-13 16:15:52+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-11-13 23:35:07+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Math/Number-Theory/CRT.test.cpp
 documentation_of: Math/Number-Theory/CRT.hpp
@@ -62,4 +62,5 @@ title: "Chinese Remainder Theorem / \u4E2D\u56FD\u5270\u4F59\u5B9A\u7406"
 - すべての$i$について、$x$を$B_i$で割ったあまりが$A_i$となるような最小の非負整数$x$を求めてください。
 - そのような$x$が存在しない場合はその旨を報告してください。
 
-
+## 注意
+- verifyに使用している問題『中華風(Easy)』は非負整数ではなく「正の整数」を求めています。

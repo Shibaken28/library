@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: Math/Number-Theory/CRT.test.cpp
+    title: Math/Number-Theory/CRT.test.cpp
+  - icon: ':heavy_check_mark:'
     path: Math/Number-Theory/GCD.test.cpp
     title: Math/Number-Theory/GCD.test.cpp
   - icon: ':heavy_check_mark:'
@@ -34,6 +37,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Math/Number-Theory/GCD.test.cpp
+  - Math/Number-Theory/CRT.test.cpp
   - Math/Number-Theory/LCM.test.cpp
 documentation_of: Math/Number-Theory/GCD.hpp
 layout: document

@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: Math/Number-Theory/enum-prme.test.cpp
+    title: Math/Number-Theory/enum-prme.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"Math/Number-Theory/enum-prime.hpp\"\n# include <vector>\n\
@@ -76,8 +79,9 @@ data:
   path: Math/Number-Theory/enum-prime.hpp
   requiredBy: []
   timestamp: '2023-11-13 15:54:10+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - Math/Number-Theory/enum-prme.test.cpp
 documentation_of: Math/Number-Theory/enum-prime.hpp
 layout: document
 title: "enumerate prime / \u7D20\u6570\u7BE9"
