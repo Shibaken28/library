@@ -37,8 +37,15 @@ data:
   - Math/Natural/LCM.test.cpp
 documentation_of: Math/Natural/GCD.hpp
 layout: document
-redirect_from:
-- /library/Math/Natural/GCD.hpp
-- /library/Math/Natural/GCD.hpp.html
-title: Math/Natural/GCD.hpp
+title: "GCD, LCM / \u6700\u5927\u516C\u7D04\u6570\u3068\u6700\u5C0F\u516C\u500D\u6570"
 ---
+
+## 概要
+最大公約数(Greatest Common Divisor)と最小公倍数(Least Common Multiple)を求めます。
+
+`vector`の入力にも対応しています
+
+## 計算量
+$O(\log \min(a,b))$
+
+

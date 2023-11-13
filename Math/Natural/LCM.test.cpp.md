@@ -3,7 +3,8 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: Math/Natural/GCD.hpp
-    title: Math/Natural/GCD.hpp
+    title: "GCD, LCM / \u6700\u5927\u516C\u7D04\u6570\u3068\u6700\u5C0F\u516C\u500D\
+      \u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
