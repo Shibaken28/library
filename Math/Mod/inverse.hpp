@@ -1,4 +1,4 @@
-# include "../Math/Number-Theory/ext-euclid.hpp"
+# include "/Math/Number-Theory/ext-euclid.hpp"
 
 // 逆元 a^{-1} mod m
 long modinv(long a,long m){
