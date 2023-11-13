@@ -1,5 +1,5 @@
 ---
-title: date / 1年1月1日からの日数を計算する
+title: date count / 1年1月1日からの日数を計算する
 documentation_of: ./date.hpp
 ---
 

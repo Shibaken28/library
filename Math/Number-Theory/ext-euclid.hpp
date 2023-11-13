@@ -10,4 +10,3 @@ long extGCD(long a, long b, long &x, long &y) {
     y -= a/b * x;
     return d;
 }
-
