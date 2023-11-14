@@ -1,7 +1,4 @@
-# include <vector>
-# include <iostream>
-using namespace std;
-
+# include "templete.hpp"
 // matrix
 template<class T> struct Matrix {
     vector<vector<T> > val;

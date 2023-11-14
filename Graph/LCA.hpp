@@ -1,6 +1,4 @@
-# include <vector>
-using namespace std;
-
+# include "templete.hpp"
 
 struct Edge{
     int to;

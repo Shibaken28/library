@@ -1,6 +1,4 @@
-# include <vector>
-# include <algorithm>
-using namespace std;
+# include "templete.hpp"
 
 // 順列列挙
 vector<vector<int>> permutations(int N){

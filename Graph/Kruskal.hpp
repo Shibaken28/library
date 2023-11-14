@@ -1,5 +1,4 @@
-# include "UnionFind.hpp"
-# include <algorithm>
+# include "templete.hpp"
 
 /*クラスカル法*/
 struct Edge{

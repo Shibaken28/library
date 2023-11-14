@@ -1,6 +1,4 @@
-# include <vector>
-# include <map>
-using namespace std;
+# include "templete.hpp"
 
 struct UnionFind{
     public:

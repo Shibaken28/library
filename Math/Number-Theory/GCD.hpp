@@ -1,5 +1,4 @@
-# include <vector>
-using namespace std;
+# include "templete.hpp"
 
 long GCD(long a,long b){
     if(a<b)return GCD(b,a);

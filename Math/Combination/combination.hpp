@@ -1,5 +1,4 @@
-# include <vector>
-using namespace std;
+# include "templete.hpp"
 
 template<class T> struct Combination{
     int N;

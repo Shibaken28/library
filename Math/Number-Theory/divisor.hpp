@@ -1,6 +1,4 @@
-# include <vector>
-# include <algorithm>
-using namespace std;
+# include "templete.hpp"
 
 //約数列挙
 vector<long> divisor(long x){

@@ -1,7 +1,5 @@
-# include <vector>
-# include <utility>
+# include "templete.hpp"
 # include "ext-euclid.hpp"
-using namespace std;
 
 long mod(long a,long m){
     if(a>=0)return a%m; 

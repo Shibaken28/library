@@ -1,3 +1,5 @@
+# include "templete.hpp"
+
 /*1年1月1日からの経過日数(1年1月1日が0日目)*/
 int days(int y,int m,int d){
     if(m==1||m==2){

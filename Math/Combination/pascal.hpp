@@ -1,5 +1,4 @@
-# include <vector>
-using namespace std;
+# include "templete.hpp"
 
 struct Pascal{
     //tri[a][b] = aCb

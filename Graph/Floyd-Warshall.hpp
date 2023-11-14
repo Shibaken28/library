@@ -1,5 +1,4 @@
-# include <vector>
-using namespace std;
+# include "templete.hpp"
 
 /*
 Gは隣接行列である必要があり，辺がない場合はINF，自己ループ辺は0

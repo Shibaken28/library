@@ -1,3 +1,4 @@
+# include "templete.hpp"
 # include "../Number-Theory/ext-euclid.hpp"
 
 // 逆元 a^{-1} mod m

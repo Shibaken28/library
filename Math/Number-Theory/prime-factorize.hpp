@@ -1,5 +1,4 @@
-# include <vector>
-using namespace std;
+# include "templete.hpp"
 
 //素因数分解
 vector<long> factor(long x){

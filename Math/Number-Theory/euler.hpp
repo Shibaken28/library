@@ -1,7 +1,4 @@
-# include <vector>
-# include <algorithm>
-using namespace std;
-
+# include "templete.hpp"
 # include "prime-factorize.hpp"
 
 long power(long a, long b){
