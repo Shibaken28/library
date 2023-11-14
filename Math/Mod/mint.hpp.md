@@ -14,15 +14,15 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"Math/Mod/mint.hpp\"\n// modint: mod \u8A08\u7B97\u3092 int\
-    \ \u3092\u6271\u3046\u3088\u3046\u306B\u6271\u3048\u308B\u69CB\u9020\u4F53\ntemplate<int\
-    \ MOD> struct Fp {\n    long long val;\n    constexpr Fp(long long v = 0) noexcept\
-    \ : val(v % MOD) {\n        if (val < 0) val += MOD;\n    }\n    constexpr int\
-    \ getmod() { return MOD; }\n    constexpr Fp operator - () const noexcept {\n\
-    \        return val ? MOD - val : 0;\n    }\n    constexpr Fp operator + (const\
-    \ Fp& r) const noexcept { return Fp(*this) += r; }\n    constexpr Fp operator\
-    \ - (const Fp& r) const noexcept { return Fp(*this) -= r; }\n    constexpr Fp\
-    \ operator * (const Fp& r) const noexcept { return Fp(*this) *= r; }\n    constexpr\
+  bundledCode: "#line 1 \"Math/Mod/mint.hpp\"\n\n// modint: mod \u8A08\u7B97\u3092\
+    \ int \u3092\u6271\u3046\u3088\u3046\u306B\u6271\u3048\u308B\u69CB\u9020\u4F53\
+    \ntemplate<int MOD> struct Fp {\n    long long val;\n    constexpr Fp(long long\
+    \ v = 0) noexcept : val(v % MOD) {\n        if (val < 0) val += MOD;\n    }\n\
+    \    constexpr int getmod() { return MOD; }\n    constexpr Fp operator - () const\
+    \ noexcept {\n        return val ? MOD - val : 0;\n    }\n    constexpr Fp operator\
+    \ + (const Fp& r) const noexcept { return Fp(*this) += r; }\n    constexpr Fp\
+    \ operator - (const Fp& r) const noexcept { return Fp(*this) -= r; }\n    constexpr\
+    \ Fp operator * (const Fp& r) const noexcept { return Fp(*this) *= r; }\n    constexpr\
     \ Fp operator / (const Fp& r) const noexcept { return Fp(*this) /= r; }\n    constexpr\
     \ Fp& operator += (const Fp& r) noexcept {\n        val += r.val;\n        if\
     \ (val >= MOD) val -= MOD;\n        return *this;\n    }\n    constexpr Fp& operator\
@@ -41,7 +41,7 @@ data:
     \ Fp<MOD> &a, long long n) noexcept {\n        if (n == 0) return 1;\n       \
     \ auto t = modpow(a, n / 2);\n        t = t * t;\n        if (n & 1) t = t * a;\n\
     \        return t;\n    }\n};\n\n"
-  code: "// modint: mod \u8A08\u7B97\u3092 int \u3092\u6271\u3046\u3088\u3046\u306B\
+  code: "\n// modint: mod \u8A08\u7B97\u3092 int \u3092\u6271\u3046\u3088\u3046\u306B\
     \u6271\u3048\u308B\u69CB\u9020\u4F53\ntemplate<int MOD> struct Fp {\n    long\
     \ long val;\n    constexpr Fp(long long v = 0) noexcept : val(v % MOD) {\n   \
     \     if (val < 0) val += MOD;\n    }\n    constexpr int getmod() { return MOD;\
@@ -72,7 +72,7 @@ data:
   isVerificationFile: false
   path: Math/Mod/mint.hpp
   requiredBy: []
-  timestamp: '2023-11-13 15:54:10+09:00'
+  timestamp: '2023-11-14 13:45:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Math/Linear/Matrix.test.cpp

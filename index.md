@@ -1,6 +1,11 @@
 ---
 data:
   libraryCategories:
+  - name: Data-Structure
+    pages:
+    - icon: ':warning:'
+      path: Data-Structure/cumulative.hpp
+      title: Data-Structure/cumulative.hpp
   - name: Enumerate
     pages:
     - icon: ':heavy_check_mark:'
@@ -20,7 +25,7 @@ data:
       path: Graph/Floyd-Warshall.hpp
       title: "Floyd-Warshall algorithm / \u30D5\u30ED\u30A4\u30C9\u30EF\u30FC\u30B7\
         \u30E3\u30EB\u6CD5\u306B\u3088\u308B\u5168\u70B9\u5BFE\u6700\u77ED\u7D4C\u8DEF"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Graph/Kruskal.hpp
       title: "Kruskal's algorithm / \u30AF\u30E9\u30B9\u30AB\u30EB\u6CD5\u306B\u3088\
         \u308B\u6700\u5C0F\u5168\u57DF\u6728"
@@ -100,6 +105,9 @@ data:
     - icon: ':warning:'
       path: random.cpp
       title: random.cpp
+    - icon: ':question:'
+      path: templete.hpp
+      title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   verificationCategories:
   - name: Enumerate
     pages:
@@ -117,7 +125,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/Floyd-Warshall.test.cpp
       title: Graph/Floyd-Warshall.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Graph/Kruskal.test.cpp
       title: Graph/Kruskal.test.cpp
     - icon: ':heavy_check_mark:'

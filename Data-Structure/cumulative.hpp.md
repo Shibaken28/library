@@ -1,24 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: Sample/add.hpp
-    title: "Sample / \u8DB3\u3057\u7B97\u306E\u30B5\u30F3\u30D7\u30EB"
   - icon: ':question:'
     path: templete.hpp
     title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _pathExtension: hpp
+  _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/aplusb
-    links:
-    - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"Sample/add.test.cpp\"\n# define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\
-    \n# include <iostream>\n#line 2 \"templete.hpp\"\n\n#line 4 \"templete.hpp\"\n\
+    links: []
+  bundledCode: "#line 2 \"templete.hpp\"\n\n#include <iostream> // cout, endl, cin\n\
     #include <string> // string, to_string, stoi\n#include <vector> // vector\n#include\
     \ <algorithm> // min, max, swap, sort, reverse, lower_bound, upper_bound\n#include\
     \ <utility> // pair, make_pair\n#include <tuple> // tuple, make_tuple\n#include\
@@ -51,26 +44,32 @@ data:
     \ endl; }\n \ntemplate <typename Head, typename... Tail>\nvoid print(Head H, Tail...\
     \ T) {\n  cout << H << \" \";\n  print(T...);\n}\n\n\ntemplate<class T> std::istream\
     \ &operator>>(std::istream &in,vector<T>&A){\n    for(T&a:A){\n        std::cin>>a;\n\
-    \    }\n    return in;\n}\n\n#line 2 \"Sample/add.hpp\"\n\nint sum(int a, int\
-    \ b){\n    return a + b;\n}\n#line 4 \"Sample/add.test.cpp\"\nusing namespace\
-    \ std;\n\nint main(){\n    int a, b;\n    cin >> a >> b;\n    cout << sum(a, b)\
-    \ << endl;\n}\n"
-  code: "# define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n# include <iostream>\n\
-    # include \"add.hpp\"\nusing namespace std;\n\nint main(){\n    int a, b;\n  \
-    \  cin >> a >> b;\n    cout << sum(a, b) << endl;\n}\n"
+    \    }\n    return in;\n}\n\n#line 2 \"Data-Structure/cumulative.hpp\"\n\ntemplate<class\
+    \ T> struct CumulativeSum{\n    size_t n;\n    vector<T> A;\n    CumulativeSum(size_t\
+    \ n){\n        this->n=n;\n        init();\n    };\n    void init(){\n       \
+    \ A.resize(n+1);\n    }\n    void add(int i,T x){\n        A[i+1]=x;\n    }\n\
+    \    void build(){\n        for(int i=0;i<n;i++){\n            A[i+1]+=A[i];\n\
+    \        }\n    }\n    /*[l,r)\u306E\u7DCF\u548C\u3092\u6C42\u3081\u308B*/\n \
+    \   T query(int l,int r){\n        return A[r]-A[l];\n    }\n};\n"
+  code: "# include \"templete.hpp\"\n\ntemplate<class T> struct CumulativeSum{\n \
+    \   size_t n;\n    vector<T> A;\n    CumulativeSum(size_t n){\n        this->n=n;\n\
+    \        init();\n    };\n    void init(){\n        A.resize(n+1);\n    }\n  \
+    \  void add(int i,T x){\n        A[i+1]=x;\n    }\n    void build(){\n       \
+    \ for(int i=0;i<n;i++){\n            A[i+1]+=A[i];\n        }\n    }\n    /*[l,r)\u306E\
+    \u7DCF\u548C\u3092\u6C42\u3081\u308B*/\n    T query(int l,int r){\n        return\
+    \ A[r]-A[l];\n    }\n};\n"
   dependsOn:
-  - Sample/add.hpp
   - templete.hpp
-  isVerificationFile: true
-  path: Sample/add.test.cpp
+  isVerificationFile: false
+  path: Data-Structure/cumulative.hpp
   requiredBy: []
   timestamp: '2023-11-14 13:45:06+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: Sample/add.test.cpp
+documentation_of: Data-Structure/cumulative.hpp
 layout: document
 redirect_from:
-- /verify/Sample/add.test.cpp
-- /verify/Sample/add.test.cpp.html
-title: Sample/add.test.cpp
+- /library/Data-Structure/cumulative.hpp
+- /library/Data-Structure/cumulative.hpp.html
+title: Data-Structure/cumulative.hpp
 ---
