@@ -1,4 +1,4 @@
-#line 1 "Data-Structure/cumulative2D.test.cpp"
+#line 1 "Data-Structure/BIT.test.cpp"
 #line 2 "templete.hpp"
 
 #include <iostream> // cout, endl, cin
@@ -115,81 +115,56 @@ template<class T> std::istream &operator>>(std::istream &in,vector<T>&A){
     return in;
 }
 
-#line 2 "Data-Structure/cumulative2D.hpp"
+#line 2 "Data-Structure/BIT.hpp"
 
-
-template<class T> struct CumulativeSum2D{
-    size_t H,W;
-    vector<vector<T>>data,A;
-    bool isBuild=false;
-    CumulativeSum2D(size_t H,size_t W){
-        this->H=H;
-        this->W=W;
-        data.resize(H+1,vector<T>(W+1,0));
-        A.resize(H+1,vector<T>(W+1,0));
-    }
-    void add(int y1,int x1,int y2,int x2,T x){
-        A[y1][x1]+=x;
-        A[y2+1][x1]-=x;
-        A[y1][x2+1]-=x;
-        A[y2+1][x2+1]+=x;
-    }
-    void add(int y1,int x1,T x){
-        add(y1,x1,y1+1,x1+1,x);
-    }
-
-    void build(){
-        data=vector<vector<T>>(A.size()+1,vector<T>(A.front().size()+1,0));
-        
-        for(int _=0; _<2; _++){
-            for(size_t i=0; i<=H; i++){
-                for(size_t j=0; j<W; j++){
-                    A[i][j+1]+=A[i][j];
-                }
-            }
-            for(size_t i=0; i<H; i++){
-                for(size_t j=0; j<=W; j++){
-                    A[i+1][j]+=A[i][j];
-                }
-            }
+// Binary Indexed Tree
+template<typename T> struct BinaryIndexedTree{
+    // 1-indexed
+    size_t n;
+    vector<T> A;
+    BinaryIndexedTree(size_t n){
+        this->n=n;
+        init();
+    };
+    void init(){
+        A.resize(n+1);
+        for(int i=0;i<=n;i++){
+            A[i]=0;
         }
-
-        for(size_t i=0; i<=H; i++){
-            for(size_t j=0; j<=W; j++){
-                data[i+1][j+1]=A[i][j];
-            }
+    }
+    // 一点加算と区間和
+    void add(int i,T x){
+        while(i<=n){
+            A[i]+=x;
+            i+=i&-i;
         }
-
-        isBuild=true;
     }
-    /*w1<=x<w2, h1<=y<h2*/
-    T sum(int h1,int w1,int h2,int w2){
-        if(!isBuild)build();
-        return data[h2][w2]-data[h1][w2]-data[h2][w1]+data[h1][w1];
+    T query(int i){
+        T res=0;
+        while(i>0){
+            res+=A[i];
+            i-=i&-i;
+        }
+        return res;
     }
-    // 1�_�̒l��Ԃ�
-    T sum(int h1,int w1){
-        return sum(h1,w1,h1+1,w1+1);
+    // [l,r]の総和を求める
+    T query(int l,int r){
+        return query(r)-query(l-1);
     }
 };
-#line 3 "Data-Structure/cumulative2D.test.cpp"
+#line 3 "Data-Structure/BIT.test.cpp"
 
 int main(){
-    int N;cin>>N;
-    int M = 2;
-    CumulativeSum2D<long> cum(M,M);
-    for(int i=0;i<N;i++){
-        int x1,y1,x2,y2;cin>>x1>>y1>>x2>>y2;
-        cum.add(y1,x1,y2-1,x2-1,1);
-    }
-    // 一番大きい値を探す
-    long ans=0;
-    for(int i=0;i<M;i++){
-        for(int j=0;j<M;j++){
-            chmax(ans,cum.sum(i,j));
-            cout << cum.sum(i,j)  << " ";
+    // 1-indexed
+    int N,Q;cin>>N>>Q;
+    BinaryIndexedTree<long> bit(N);
+    for(int i=0;i<Q;i++){
+        int c,x,y;cin>>c>>x>>y;
+        if(c==0){
+            bit.add(x,y);
+        }else{
+            cout<<bit.query(x,y)<<endl;
         }
-        cout << endl;
     }
-    cout << ans << endl;
 }
+

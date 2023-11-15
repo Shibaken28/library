@@ -10,5 +10,6 @@ if [ $# -ne 1 ]; then
 fi
 
 oj-bundle $1 | clip.exe
-oj-bundle $1 > random.cpp
+# define PROBLEMがある行を削除してrandom.cppに出力
+oj-bundle $1 | sed -e '/define PROBLEM/d' > random.cpp
 make random
