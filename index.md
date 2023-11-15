@@ -4,6 +4,9 @@ data:
   - name: Data-Structure
     pages:
     - icon: ':heavy_check_mark:'
+      path: Data-Structure/BIT.hpp
+      title: "Binary Indexed Tree / Fenwick Tree / \u30D5\u30A7\u30CB\u30C3\u30AF\u6728"
+    - icon: ':heavy_check_mark:'
       path: Data-Structure/cumulative.hpp
       title: "cumulative sum / \u7D2F\u7A4D\u548C"
     - icon: ':heavy_check_mark:'
@@ -124,6 +127,9 @@ data:
   verificationCategories:
   - name: Data-Structure
     pages:
+    - icon: ':heavy_check_mark:'
+      path: Data-Structure/BIT.test.cpp
+      title: Data-Structure/BIT.test.cpp
     - icon: ':heavy_check_mark:'
       path: Data-Structure/cumulative.test.cpp
       title: Data-Structure/cumulative.test.cpp

@@ -8,9 +8,9 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"random.cpp\"\n#line 1 \"Data-Structure/cumulative2D.test.cpp\"\
-    \n#line 2 \"templete.hpp\"\n\n#include <iostream> // cout, endl, cin\n#include\
-    \ <string> // string, to_string, stoi\n#include <vector> // vector\n#include <algorithm>\
+  bundledCode: "#line 1 \"random.cpp\"\n#line 1 \"Data-Structure/BIT.test.cpp\"\n\
+    #line 2 \"templete.hpp\"\n\n#include <iostream> // cout, endl, cin\n#include <string>\
+    \ // string, to_string, stoi\n#include <vector> // vector\n#include <algorithm>\
     \ // min, max, swap, sort, reverse, lower_bound, upper_bound\n#include <utility>\
     \ // pair, make_pair\n#include <tuple> // tuple, make_tuple\n#include <cstdint>\
     \ // int64_t, int*_t\n#include <cstdio> // printf\n#include <map> // map\n#include\
@@ -42,38 +42,27 @@ data:
     \ endl; }\n \ntemplate <typename Head, typename... Tail>\nvoid print(Head H, Tail...\
     \ T) {\n  cout << H << \" \";\n  print(T...);\n}\n\n\ntemplate<class T> std::istream\
     \ &operator>>(std::istream &in,vector<T>&A){\n    for(T&a:A){\n        std::cin>>a;\n\
-    \    }\n    return in;\n}\n\n#line 2 \"Data-Structure/cumulative2D.hpp\"\n\n\n\
-    template<class T> struct CumulativeSum2D{\n    size_t H,W;\n    vector<vector<T>>data,A;\n\
-    \    bool isBuild=false;\n    CumulativeSum2D(size_t H,size_t W){\n        this->H=H;\n\
-    \        this->W=W;\n        data.resize(H+1,vector<T>(W+1,0));\n        A.resize(H+1,vector<T>(W+1,0));\n\
-    \    }\n    void add(int y1,int x1,int y2,int x2,T x){\n        A[y1][x1]+=x;\n\
-    \        A[y2+1][x1]-=x;\n        A[y1][x2+1]-=x;\n        A[y2+1][x2+1]+=x;\n\
-    \    }\n    void add(int y1,int x1,T x){\n        add(y1,x1,y1+1,x1+1,x);\n  \
-    \  }\n\n    void build(){\n        data=vector<vector<T>>(A.size()+1,vector<T>(A.front().size()+1,0));\n\
-    \        \n        for(int _=0; _<2; _++){\n            for(size_t i=0; i<=H;\
-    \ i++){\n                for(size_t j=0; j<W; j++){\n                    A[i][j+1]+=A[i][j];\n\
-    \                }\n            }\n            for(size_t i=0; i<H; i++){\n  \
-    \              for(size_t j=0; j<=W; j++){\n                    A[i+1][j]+=A[i][j];\n\
-    \                }\n            }\n        }\n\n        for(size_t i=0; i<=H;\
-    \ i++){\n            for(size_t j=0; j<=W; j++){\n                data[i+1][j+1]=A[i][j];\n\
-    \            }\n        }\n\n        isBuild=true;\n    }\n    /*w1<=x<w2, h1<=y<h2*/\n\
-    \    T sum(int h1,int w1,int h2,int w2){\n        if(!isBuild)build();\n     \
-    \   return data[h2][w2]-data[h1][w2]-data[h2][w1]+data[h1][w1];\n    }\n    //\
-    \ 1\uFFFD_\uFFFD\u0312l\uFFFD\uFFFD\u0502\uFFFD\n    T sum(int h1,int w1){\n \
-    \       return sum(h1,w1,h1+1,w1+1);\n    }\n};\n#line 3 \"Data-Structure/cumulative2D.test.cpp\"\
-    \n\nint main(){\n    int N;cin>>N;\n    int M = 2;\n    CumulativeSum2D<long>\
-    \ cum(M,M);\n    for(int i=0;i<N;i++){\n        int x1,y1,x2,y2;cin>>x1>>y1>>x2>>y2;\n\
-    \        cum.add(y1,x1,y2-1,x2-1,1);\n    }\n    // \u4E00\u756A\u5927\u304D\u3044\
-    \u5024\u3092\u63A2\u3059\n    long ans=0;\n    for(int i=0;i<M;i++){\n       \
-    \ for(int j=0;j<M;j++){\n            chmax(ans,cum.sum(i,j));\n            cout\
-    \ << cum.sum(i,j)  << \" \";\n        }\n        cout << endl;\n    }\n    cout\
-    \ << ans << endl;\n}\n"
-  code: "#line 1 \"Data-Structure/cumulative2D.test.cpp\"\n#line 2 \"templete.hpp\"\
-    \n\n#include <iostream> // cout, endl, cin\n#include <string> // string, to_string,\
-    \ stoi\n#include <vector> // vector\n#include <algorithm> // min, max, swap, sort,\
-    \ reverse, lower_bound, upper_bound\n#include <utility> // pair, make_pair\n#include\
-    \ <tuple> // tuple, make_tuple\n#include <cstdint> // int64_t, int*_t\n#include\
-    \ <cstdio> // printf\n#include <map> // map\n#include <queue> // queue, priority_queue\n\
+    \    }\n    return in;\n}\n\n#line 2 \"Data-Structure/BIT.hpp\"\n\n// Binary Indexed\
+    \ Tree\ntemplate<typename T> struct BinaryIndexedTree{\n    // 1-indexed\n   \
+    \ size_t n;\n    vector<T> A;\n    BinaryIndexedTree(size_t n){\n        this->n=n;\n\
+    \        init();\n    };\n    void init(){\n        A.resize(n+1);\n        for(int\
+    \ i=0;i<=n;i++){\n            A[i]=0;\n        }\n    }\n    // \u4E00\u70B9\u52A0\
+    \u7B97\u3068\u533A\u9593\u548C\n    void add(int i,T x){\n        while(i<=n){\n\
+    \            A[i]+=x;\n            i+=i&-i;\n        }\n    }\n    T query(int\
+    \ i){\n        T res=0;\n        while(i>0){\n            res+=A[i];\n       \
+    \     i-=i&-i;\n        }\n        return res;\n    }\n    // [l,r]\u306E\u7DCF\
+    \u548C\u3092\u6C42\u3081\u308B\n    T query(int l,int r){\n        return query(r)-query(l-1);\n\
+    \    }\n};\n#line 3 \"Data-Structure/BIT.test.cpp\"\n\nint main(){\n    // 1-indexed\n\
+    \    int N,Q;cin>>N>>Q;\n    BinaryIndexedTree<long> bit(N);\n    for(int i=0;i<Q;i++){\n\
+    \        int c,x,y;cin>>c>>x>>y;\n        if(c==0){\n            bit.add(x,y);\n\
+    \        }else{\n            cout<<bit.query(x,y)<<endl;\n        }\n    }\n}\n\
+    \n"
+  code: "#line 1 \"Data-Structure/BIT.test.cpp\"\n#line 2 \"templete.hpp\"\n\n#include\
+    \ <iostream> // cout, endl, cin\n#include <string> // string, to_string, stoi\n\
+    #include <vector> // vector\n#include <algorithm> // min, max, swap, sort, reverse,\
+    \ lower_bound, upper_bound\n#include <utility> // pair, make_pair\n#include <tuple>\
+    \ // tuple, make_tuple\n#include <cstdint> // int64_t, int*_t\n#include <cstdio>\
+    \ // printf\n#include <map> // map\n#include <queue> // queue, priority_queue\n\
     #include <set> // set\n#include <stack> // stack\n#include <deque> // deque\n\
     #include <unordered_map> // unordered_map\n#include <unordered_set> // unordered_set\n\
     #include <bitset> // bitset\n#include <cctype> // isupper, islower, isdigit, toupper,\
@@ -101,37 +90,26 @@ data:
     \ endl; }\n \ntemplate <typename Head, typename... Tail>\nvoid print(Head H, Tail...\
     \ T) {\n  cout << H << \" \";\n  print(T...);\n}\n\n\ntemplate<class T> std::istream\
     \ &operator>>(std::istream &in,vector<T>&A){\n    for(T&a:A){\n        std::cin>>a;\n\
-    \    }\n    return in;\n}\n\n#line 2 \"Data-Structure/cumulative2D.hpp\"\n\n\n\
-    template<class T> struct CumulativeSum2D{\n    size_t H,W;\n    vector<vector<T>>data,A;\n\
-    \    bool isBuild=false;\n    CumulativeSum2D(size_t H,size_t W){\n        this->H=H;\n\
-    \        this->W=W;\n        data.resize(H+1,vector<T>(W+1,0));\n        A.resize(H+1,vector<T>(W+1,0));\n\
-    \    }\n    void add(int y1,int x1,int y2,int x2,T x){\n        A[y1][x1]+=x;\n\
-    \        A[y2+1][x1]-=x;\n        A[y1][x2+1]-=x;\n        A[y2+1][x2+1]+=x;\n\
-    \    }\n    void add(int y1,int x1,T x){\n        add(y1,x1,y1+1,x1+1,x);\n  \
-    \  }\n\n    void build(){\n        data=vector<vector<T>>(A.size()+1,vector<T>(A.front().size()+1,0));\n\
-    \        \n        for(int _=0; _<2; _++){\n            for(size_t i=0; i<=H;\
-    \ i++){\n                for(size_t j=0; j<W; j++){\n                    A[i][j+1]+=A[i][j];\n\
-    \                }\n            }\n            for(size_t i=0; i<H; i++){\n  \
-    \              for(size_t j=0; j<=W; j++){\n                    A[i+1][j]+=A[i][j];\n\
-    \                }\n            }\n        }\n\n        for(size_t i=0; i<=H;\
-    \ i++){\n            for(size_t j=0; j<=W; j++){\n                data[i+1][j+1]=A[i][j];\n\
-    \            }\n        }\n\n        isBuild=true;\n    }\n    /*w1<=x<w2, h1<=y<h2*/\n\
-    \    T sum(int h1,int w1,int h2,int w2){\n        if(!isBuild)build();\n     \
-    \   return data[h2][w2]-data[h1][w2]-data[h2][w1]+data[h1][w1];\n    }\n    //\
-    \ 1\uFFFD_\uFFFD\u0312l\uFFFD\uFFFD\u0502\uFFFD\n    T sum(int h1,int w1){\n \
-    \       return sum(h1,w1,h1+1,w1+1);\n    }\n};\n#line 3 \"Data-Structure/cumulative2D.test.cpp\"\
-    \n\nint main(){\n    int N;cin>>N;\n    int M = 2;\n    CumulativeSum2D<long>\
-    \ cum(M,M);\n    for(int i=0;i<N;i++){\n        int x1,y1,x2,y2;cin>>x1>>y1>>x2>>y2;\n\
-    \        cum.add(y1,x1,y2-1,x2-1,1);\n    }\n    // \u4E00\u756A\u5927\u304D\u3044\
-    \u5024\u3092\u63A2\u3059\n    long ans=0;\n    for(int i=0;i<M;i++){\n       \
-    \ for(int j=0;j<M;j++){\n            chmax(ans,cum.sum(i,j));\n            cout\
-    \ << cum.sum(i,j)  << \" \";\n        }\n        cout << endl;\n    }\n    cout\
-    \ << ans << endl;\n}\n"
+    \    }\n    return in;\n}\n\n#line 2 \"Data-Structure/BIT.hpp\"\n\n// Binary Indexed\
+    \ Tree\ntemplate<typename T> struct BinaryIndexedTree{\n    // 1-indexed\n   \
+    \ size_t n;\n    vector<T> A;\n    BinaryIndexedTree(size_t n){\n        this->n=n;\n\
+    \        init();\n    };\n    void init(){\n        A.resize(n+1);\n        for(int\
+    \ i=0;i<=n;i++){\n            A[i]=0;\n        }\n    }\n    // \u4E00\u70B9\u52A0\
+    \u7B97\u3068\u533A\u9593\u548C\n    void add(int i,T x){\n        while(i<=n){\n\
+    \            A[i]+=x;\n            i+=i&-i;\n        }\n    }\n    T query(int\
+    \ i){\n        T res=0;\n        while(i>0){\n            res+=A[i];\n       \
+    \     i-=i&-i;\n        }\n        return res;\n    }\n    // [l,r]\u306E\u7DCF\
+    \u548C\u3092\u6C42\u3081\u308B\n    T query(int l,int r){\n        return query(r)-query(l-1);\n\
+    \    }\n};\n#line 3 \"Data-Structure/BIT.test.cpp\"\n\nint main(){\n    // 1-indexed\n\
+    \    int N,Q;cin>>N>>Q;\n    BinaryIndexedTree<long> bit(N);\n    for(int i=0;i<Q;i++){\n\
+    \        int c,x,y;cin>>c>>x>>y;\n        if(c==0){\n            bit.add(x,y);\n\
+    \        }else{\n            cout<<bit.query(x,y)<<endl;\n        }\n    }\n}\n\
+    \n"
   dependsOn: []
   isVerificationFile: false
   path: random.cpp
   requiredBy: []
-  timestamp: '2023-11-16 00:45:03+09:00'
+  timestamp: '2023-11-16 02:00:57+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: random.cpp

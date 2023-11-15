@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: Data-Structure/BIT.hpp
+    title: "Binary Indexed Tree / Fenwick Tree / \u30D5\u30A7\u30CB\u30C3\u30AF\u6728"
+  - icon: ':heavy_check_mark:'
     path: Data-Structure/cumulative.hpp
     title: "cumulative sum / \u7D2F\u7A4D\u548C"
   - icon: ':heavy_check_mark:'
@@ -84,6 +87,9 @@ data:
     title: "date count / 1\u5E741\u67081\u65E5\u304B\u3089\u306E\u65E5\u6570\u3092\
       \u8A08\u7B97\u3059\u308B"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: Data-Structure/BIT.test.cpp
+    title: Data-Structure/BIT.test.cpp
   - icon: ':heavy_check_mark:'
     path: Data-Structure/cumulative.test.cpp
     title: Data-Structure/cumulative.test.cpp
@@ -248,6 +254,7 @@ data:
   - Math/Combination/pascal.hpp
   - Uncategorized/date.hpp
   - Enumerate/permutations.hpp
+  - Data-Structure/BIT.hpp
   - Data-Structure/cumulative2D.hpp
   - Data-Structure/cumulative.hpp
   - Sample/add.hpp
@@ -275,6 +282,7 @@ data:
   - Enumerate/permutations.test.cpp
   - Data-Structure/cumulative.test.cpp
   - Data-Structure/cumulative2D.test.cpp
+  - Data-Structure/BIT.test.cpp
   - Sample/add.test.cpp
 documentation_of: templete.hpp
 layout: document
