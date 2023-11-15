@@ -5,7 +5,7 @@ data:
     path: Math/Number-Theory/ext-euclid.hpp
     title: "Extended Euclidean algorithm / \u62E1\u5F35\u30E6\u30FC\u30AF\u30EA\u30C3\
       \u30C9\u306E\u4E92\u9664\u6CD5"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: templete.hpp
     title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []

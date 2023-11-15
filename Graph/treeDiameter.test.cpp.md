@@ -2,12 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: Math/Number-Theory/euler.hpp
-    title: "Euler's Phi Function / \u30AA\u30A4\u30E9\u30FC\u306E\u30D5\u30A1\u30A4\
-      \u95A2\u6570"
-  - icon: ':heavy_check_mark:'
-    path: Math/Number-Theory/prime-factorize.hpp
-    title: "prime factorize/ \u7D20\u56E0\u6570\u5206\u89E3"
+    path: Graph/treeDiameter.hpp
+    title: "Tree Diameter / \u6728\u306E\u76F4\u5F84"
   - icon: ':heavy_check_mark:'
     path: templete.hpp
     title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -18,13 +14,12 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/1/NTL_1_D
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/problems/GRL_5_A
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/1/NTL_1_D
-  bundledCode: "#line 1 \"Math/Number-Theory/euler.test.cpp\"\n# define PROBLEM \"\
-    https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/1/NTL_1_D\"\n# include\
-    \ <iostream>\n#line 2 \"templete.hpp\"\n\n#line 4 \"templete.hpp\"\n#include <string>\
-    \ // string, to_string, stoi\n#include <vector> // vector\n#include <algorithm>\
+    - https://onlinejudge.u-aizu.ac.jp/problems/GRL_5_A
+  bundledCode: "#line 1 \"Graph/treeDiameter.test.cpp\"\n# define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/problems/GRL_5_A\"\
+    \n#line 2 \"templete.hpp\"\n\n#include <iostream> // cout, endl, cin\n#include\
+    \ <string> // string, to_string, stoi\n#include <vector> // vector\n#include <algorithm>\
     \ // min, max, swap, sort, reverse, lower_bound, upper_bound\n#include <utility>\
     \ // pair, make_pair\n#include <tuple> // tuple, make_tuple\n#include <cstdint>\
     \ // int64_t, int*_t\n#include <cstdio> // printf\n#include <map> // map\n#include\
@@ -56,42 +51,40 @@ data:
     \ endl; }\n \ntemplate <typename Head, typename... Tail>\nvoid print(Head H, Tail...\
     \ T) {\n  cout << H << \" \";\n  print(T...);\n}\n\n\ntemplate<class T> std::istream\
     \ &operator>>(std::istream &in,vector<T>&A){\n    for(T&a:A){\n        std::cin>>a;\n\
-    \    }\n    return in;\n}\n\n#line 2 \"Math/Number-Theory/prime-factorize.hpp\"\
-    \n\n//\u7D20\u56E0\u6570\u5206\u89E3\nvector<long> factor(long x){\n    vector<long>\
-    \ f(0);\n    for(long i=2;i*i<=x;i++){\n        if(x%i==0){\n            f.push_back(i);\n\
-    \            x/=i;\n            i--;\n        }\n    }\n    if(x>1)f.push_back(x);\n\
-    \    return f;\n}\n\n//\u7D20\u56E0\u6570\u5206\u89E32\n// (\u7D20\u6570,\u6307\
-    \u6570) \u306Epair\nvector<pair<long,long>> factor2(long x){\n    auto f = factor(x);\n\
-    \    vector<pair<long,long>> f2(0);\n    for(auto a:f){\n        if(f2.empty()){\n\
-    \            f2.push_back({a,1});\n        }else if(f2.back().first==a){\n   \
-    \         f2.back().second ++;\n        }else{\n            f2.push_back({a,1});\n\
-    \        }\n    }\n    return f2;\n}\n#line 3 \"Math/Number-Theory/euler.hpp\"\
-    \n\nlong power(long a, long b){\n    long ret = 1;\n    while(b){\n        if(b&1)ret\
-    \ *= a;\n        a *= a;\n        b >>= 1;\n    }\n    return ret;\n}\n\n\nlong\
-    \ euler(long n){\n    if(n<=1)return 0;\n    // \u30AA\u30A4\u30E9\u30FC\u95A2\
-    \u6570\n    // p1^e1 * p2^e2 * ... * pk^ek \u306B\u5BFE\u3057\u3066\n    // (p1-1)*p1^(e1-1)\
-    \ * (p2-1)*p2^(e2-1) * ... * (pk-1)*pk^(ek-1)\n    // \u3092\u8FD4\u3059\n   \
-    \ auto f = factor2(n);\n    long ret = 1;\n    for(auto[p,e]:f){\n        ret\
-    \ *= (p-1)*power(p,e-1);\n    }\n    return ret;\n}\n#line 4 \"Math/Number-Theory/euler.test.cpp\"\
-    \nusing namespace std;\n\nint main(){\n    long n;\n    cin >> n;\n    cout <<\
-    \ euler(n) << endl;\n    return 0;\n}\n"
-  code: "# define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/1/NTL_1_D\"\
-    \n# include <iostream>\n# include \"euler.hpp\"\nusing namespace std;\n\nint main(){\n\
-    \    long n;\n    cin >> n;\n    cout << euler(n) << endl;\n    return 0;\n}"
+    \    }\n    return in;\n}\n\n#line 2 \"Graph/treeDiameter.hpp\"\n\n// \u6728\u306E\
+    \u76F4\u5F84\u3092\u6C42\u3081\u308B\n\nusing CostT = long long;\n\n\nstruct Edge{\n\
+    \    int to;\n    CostT cost;\n};\n\nusing Graph = vector<vector<Edge>>;\n\nvoid\
+    \ dfs(Graph &G,int v,int p,long d,vector<CostT>&dist){\n    // v:\u73FE\u5728\u306E\
+    \u9802\u70B9\n    // p:\u89AA\u306E\u9802\u70B9\n    // d:\u73FE\u5728\u306E\u8DDD\
+    \u96E2\n    dist[v] = d;\n    for(auto& e:G[v]){\n        if(e.to!=p){\n     \
+    \       dfs(G,e.to,v,d+e.cost,dist);\n        }\n    }\n}\n\npair<int,CostT> treeDiameter(Graph\
+    \ &G){\n    // \u6728\u306E\u76F4\u5F84\u3092\u6C42\u3081\u308B\n    // return:\
+    \ (\u76F4\u5F84\u306E\u7AEF\u70B9\u306E\u3046\u3061\u306E\u4E00\u3064,\u76F4\u5F84\
+    \u306E\u91CD\u3055)\n    int n = G.size();\n    vector<CostT> dist(n);\n    dfs(G,0,-1,0,dist);\n\
+    \    int u = max_element(dist.begin(),dist.end())-dist.begin();\n    dfs(G,u,-1,0,dist);\n\
+    \    int v = max_element(dist.begin(),dist.end())-dist.begin();\n    return {v,dist[v]};\n\
+    }\n#line 3 \"Graph/treeDiameter.test.cpp\"\n\nint main(){\n    int n;cin>>n;\n\
+    \    Graph G(n);\n    for(int i=0;i<n-1;i++){\n        int s,t,w;cin>>s>>t>>w;\n\
+    \        G[s].push_back({t,w});\n        G[t].push_back({s,w});\n    }\n    auto\
+    \ res = treeDiameter(G);\n    cout<<res.second<<endl;\n}\n"
+  code: "# define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/problems/GRL_5_A\"\n\
+    # include \"treeDiameter.hpp\"\n\nint main(){\n    int n;cin>>n;\n    Graph G(n);\n\
+    \    for(int i=0;i<n-1;i++){\n        int s,t,w;cin>>s>>t>>w;\n        G[s].push_back({t,w});\n\
+    \        G[t].push_back({s,w});\n    }\n    auto res = treeDiameter(G);\n    cout<<res.second<<endl;\n\
+    }\n"
   dependsOn:
-  - Math/Number-Theory/euler.hpp
+  - Graph/treeDiameter.hpp
   - templete.hpp
-  - Math/Number-Theory/prime-factorize.hpp
   isVerificationFile: true
-  path: Math/Number-Theory/euler.test.cpp
+  path: Graph/treeDiameter.test.cpp
   requiredBy: []
-  timestamp: '2023-11-14 13:45:06+09:00'
+  timestamp: '2023-11-16 00:45:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: Math/Number-Theory/euler.test.cpp
+documentation_of: Graph/treeDiameter.test.cpp
 layout: document
 redirect_from:
-- /verify/Math/Number-Theory/euler.test.cpp
-- /verify/Math/Number-Theory/euler.test.cpp.html
-title: Math/Number-Theory/euler.test.cpp
+- /verify/Graph/treeDiameter.test.cpp
+- /verify/Graph/treeDiameter.test.cpp.html
+title: Graph/treeDiameter.test.cpp
 ---

@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Sample/add.hpp
     title: "Sample / \u8DB3\u3057\u7B97\u306E\u30B5\u30F3\u30D7\u30EB"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: templete.hpp
     title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []

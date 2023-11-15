@@ -3,9 +3,12 @@ data:
   libraryCategories:
   - name: Data-Structure
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: Data-Structure/cumulative.hpp
-      title: Data-Structure/cumulative.hpp
+      title: "cumulative sum / \u7D2F\u7A4D\u548C"
+    - icon: ':heavy_check_mark:'
+      path: Data-Structure/cumulative2D.hpp
+      title: "2D cumulative sum / 2\u6B21\u5143\u7D2F\u7A4D\u548C"
   - name: Enumerate
     pages:
     - icon: ':heavy_check_mark:'
@@ -25,7 +28,7 @@ data:
       path: Graph/Floyd-Warshall.hpp
       title: "Floyd-Warshall algorithm / \u30D5\u30ED\u30A4\u30C9\u30EF\u30FC\u30B7\
         \u30E3\u30EB\u6CD5\u306B\u3088\u308B\u5168\u70B9\u5BFE\u6700\u77ED\u7D4C\u8DEF"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Graph/Kruskal.hpp
       title: "Kruskal's algorithm / \u30AF\u30E9\u30B9\u30AB\u30EB\u6CD5\u306B\u3088\
         \u308B\u6700\u5C0F\u5168\u57DF\u6728"
@@ -33,8 +36,18 @@ data:
       path: Graph/LCA.hpp
       title: "Lowest Common Ancestor / \u6700\u5C0F\u5171\u901A\u7956\u5148"
     - icon: ':heavy_check_mark:'
+      path: Graph/Prim.hpp
+      title: "Prim's algorithm / \u30D7\u30EA\u30E0\u6CD5\u306B\u3088\u308B\u6700\u5C0F\
+        \u5168\u57DF\u6728"
+    - icon: ':heavy_check_mark:'
       path: Graph/UnionFind.hpp
       title: UnionFind
+    - icon: ':heavy_check_mark:'
+      path: Graph/treeDiameter.hpp
+      title: "Tree Diameter / \u6728\u306E\u76F4\u5F84"
+    - icon: ':heavy_check_mark:'
+      path: Graph/treeWalk.hpp
+      title: "Tree Walk / \u4E8C\u5206\u6728\u306E\u5DE1\u56DE"
   - name: Math/Combination
     pages:
     - icon: ':heavy_check_mark:'
@@ -105,10 +118,18 @@ data:
     - icon: ':warning:'
       path: random.cpp
       title: random.cpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: templete.hpp
       title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   verificationCategories:
+  - name: Data-Structure
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: Data-Structure/cumulative.test.cpp
+      title: Data-Structure/cumulative.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Data-Structure/cumulative2D.test.cpp
+      title: Data-Structure/cumulative2D.test.cpp
   - name: Enumerate
     pages:
     - icon: ':heavy_check_mark:'
@@ -125,15 +146,24 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/Floyd-Warshall.test.cpp
       title: Graph/Floyd-Warshall.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Graph/Kruskal.test.cpp
       title: Graph/Kruskal.test.cpp
     - icon: ':heavy_check_mark:'
       path: Graph/LCA.test.cpp
       title: Graph/LCA.test.cpp
     - icon: ':heavy_check_mark:'
+      path: Graph/Prim.test.cpp
+      title: Graph/Prim.test.cpp
+    - icon: ':heavy_check_mark:'
       path: Graph/UnionFind.test.cpp
       title: Graph/UnionFind.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Graph/treeDiameter.test.cpp
+      title: Graph/treeDiameter.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Graph/treeWalk.test.cpp
+      title: Graph/treeWalk.test.cpp
   - name: Math/Combination
     pages:
     - icon: ':heavy_check_mark:'

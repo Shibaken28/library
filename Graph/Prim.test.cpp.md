@@ -2,26 +2,24 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: Graph/Prim.hpp
+    title: "Prim's algorithm / \u30D7\u30EA\u30E0\u6CD5\u306B\u3088\u308B\u6700\u5C0F\
+      \u5168\u57DF\u6728"
+  - icon: ':heavy_check_mark:'
     path: templete.hpp
     title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: Math/Number-Theory/euler.hpp
-    title: "Euler's Phi Function / \u30AA\u30A4\u30E9\u30FC\u306E\u30D5\u30A1\u30A4\
-      \u95A2\u6570"
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: Math/Number-Theory/euler.test.cpp
-    title: Math/Number-Theory/euler.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: Math/Number-Theory/prime-factorize.test.cpp
-    title: Math/Number-Theory/prime-factorize.test.cpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"templete.hpp\"\n\n#include <iostream> // cout, endl, cin\n\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_12_A
+    links:
+    - https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_12_A
+  bundledCode: "#line 1 \"Graph/Prim.test.cpp\"\n# define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_12_A\"\
+    \n# include <iostream>\n#line 2 \"templete.hpp\"\n\n#line 4 \"templete.hpp\"\n\
     #include <string> // string, to_string, stoi\n#include <vector> // vector\n#include\
     \ <algorithm> // min, max, swap, sort, reverse, lower_bound, upper_bound\n#include\
     \ <utility> // pair, make_pair\n#include <tuple> // tuple, make_tuple\n#include\
@@ -54,46 +52,41 @@ data:
     \ endl; }\n \ntemplate <typename Head, typename... Tail>\nvoid print(Head H, Tail...\
     \ T) {\n  cout << H << \" \";\n  print(T...);\n}\n\n\ntemplate<class T> std::istream\
     \ &operator>>(std::istream &in,vector<T>&A){\n    for(T&a:A){\n        std::cin>>a;\n\
-    \    }\n    return in;\n}\n\n#line 2 \"Math/Number-Theory/prime-factorize.hpp\"\
-    \n\n//\u7D20\u56E0\u6570\u5206\u89E3\nvector<long> factor(long x){\n    vector<long>\
-    \ f(0);\n    for(long i=2;i*i<=x;i++){\n        if(x%i==0){\n            f.push_back(i);\n\
-    \            x/=i;\n            i--;\n        }\n    }\n    if(x>1)f.push_back(x);\n\
-    \    return f;\n}\n\n//\u7D20\u56E0\u6570\u5206\u89E32\n// (\u7D20\u6570,\u6307\
-    \u6570) \u306Epair\nvector<pair<long,long>> factor2(long x){\n    auto f = factor(x);\n\
-    \    vector<pair<long,long>> f2(0);\n    for(auto a:f){\n        if(f2.empty()){\n\
-    \            f2.push_back({a,1});\n        }else if(f2.back().first==a){\n   \
-    \         f2.back().second ++;\n        }else{\n            f2.push_back({a,1});\n\
-    \        }\n    }\n    return f2;\n}\n"
-  code: "# include \"templete.hpp\"\n\n//\u7D20\u56E0\u6570\u5206\u89E3\nvector<long>\
-    \ factor(long x){\n    vector<long> f(0);\n    for(long i=2;i*i<=x;i++){\n   \
-    \     if(x%i==0){\n            f.push_back(i);\n            x/=i;\n          \
-    \  i--;\n        }\n    }\n    if(x>1)f.push_back(x);\n    return f;\n}\n\n//\u7D20\
-    \u56E0\u6570\u5206\u89E32\n// (\u7D20\u6570,\u6307\u6570) \u306Epair\nvector<pair<long,long>>\
-    \ factor2(long x){\n    auto f = factor(x);\n    vector<pair<long,long>> f2(0);\n\
-    \    for(auto a:f){\n        if(f2.empty()){\n            f2.push_back({a,1});\n\
-    \        }else if(f2.back().first==a){\n            f2.back().second ++;\n   \
-    \     }else{\n            f2.push_back({a,1});\n        }\n    }\n    return f2;\n\
-    }\n"
+    \    }\n    return in;\n}\n\n#line 2 \"Graph/Prim.hpp\"\n\nstruct Edge{\n    int\
+    \ from;\n    int to;\n    long cost;\n};\n\nusing Graph = vector<vector<Edge>>;\n\
+    using Pll = pair<long,long>;\n\n/*\u30D7\u30EA\u30E0\u6CD5*/\nstruct Prim{\n \
+    \   Graph G;\n    int V;\n    Prim(int V):V(V){\n        G.resize(V);\n    }\n\
+    \    //\u7121\u5411\u30B0\u30E9\u30D5\uFF01\n    void addEdge(int from,int to,long\
+    \ cost){\n        G[from].push_back({from,to,cost});\n        G[to].push_back({to,from,cost});\n\
+    \    }\n    long long build(){\n        long long res = 0;\n        vector<bool>\
+    \ used(V,false);\n        priority_queue<Pll,vector<Pll>,greater<Pll>> que;\n\
+    \        que.push({0,0});\n        while(!que.empty()){\n            auto [cost,\
+    \ v] = que.top(); que.pop();\n            if(used[v])continue;\n            used[v]\
+    \ = true;\n            res += cost;\n            for(auto& e:G[v]){\n        \
+    \        if(!used[e.to]){\n                    que.push({e.cost,e.to});\n    \
+    \            }\n            }\n        }\n        return res;\n    }\n};\n#line\
+    \ 4 \"Graph/Prim.test.cpp\"\nusing namespace std;\n\nint main(){\n    int n;\n\
+    \    cin >> n;\n    Prim k(n);\n    for(int i=0;i<n;i++)for(int j=0;j<n;j++){\n\
+    \        int a;\n        cin >> a;\n        if(a!=-1)k.addEdge(i,j,a);\n    }\n\
+    \    cout << k.build() << endl;\n}\n"
+  code: "# define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_12_A\"\
+    \n# include <iostream>\n# include \"Prim.hpp\"\nusing namespace std;\n\nint main(){\n\
+    \    int n;\n    cin >> n;\n    Prim k(n);\n    for(int i=0;i<n;i++)for(int j=0;j<n;j++){\n\
+    \        int a;\n        cin >> a;\n        if(a!=-1)k.addEdge(i,j,a);\n    }\n\
+    \    cout << k.build() << endl;\n}\n"
   dependsOn:
+  - Graph/Prim.hpp
   - templete.hpp
-  isVerificationFile: false
-  path: Math/Number-Theory/prime-factorize.hpp
-  requiredBy:
-  - Math/Number-Theory/euler.hpp
-  timestamp: '2023-11-14 13:45:06+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - Math/Number-Theory/prime-factorize.test.cpp
-  - Math/Number-Theory/euler.test.cpp
-documentation_of: Math/Number-Theory/prime-factorize.hpp
+  isVerificationFile: true
+  path: Graph/Prim.test.cpp
+  requiredBy: []
+  timestamp: '2023-11-16 00:45:03+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: Graph/Prim.test.cpp
 layout: document
-title: "prime factorize/ \u7D20\u56E0\u6570\u5206\u89E3"
+redirect_from:
+- /verify/Graph/Prim.test.cpp
+- /verify/Graph/Prim.test.cpp.html
+title: Graph/Prim.test.cpp
 ---
-
-## 概要
-素因数分解を行います。
-昇順の素数のリストを返します。
-
-## 計算量
-$O(\sqrt{n})$
-

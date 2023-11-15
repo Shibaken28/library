@@ -2,9 +2,12 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: Data-Structure/cumulative.hpp
-    title: Data-Structure/cumulative.hpp
+    title: "cumulative sum / \u7D2F\u7A4D\u548C"
+  - icon: ':heavy_check_mark:'
+    path: Data-Structure/cumulative2D.hpp
+    title: "2D cumulative sum / 2\u6B21\u5143\u7D2F\u7A4D\u548C"
   - icon: ':heavy_check_mark:'
     path: Enumerate/permutations.hpp
     title: "enumerate permutations / \u9806\u5217\u5217\u6319"
@@ -20,7 +23,7 @@ data:
     path: Graph/Floyd-Warshall.hpp
     title: "Floyd-Warshall algorithm / \u30D5\u30ED\u30A4\u30C9\u30EF\u30FC\u30B7\u30E3\
       \u30EB\u6CD5\u306B\u3088\u308B\u5168\u70B9\u5BFE\u6700\u77ED\u7D4C\u8DEF"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/Kruskal.hpp
     title: "Kruskal's algorithm / \u30AF\u30E9\u30B9\u30AB\u30EB\u6CD5\u306B\u3088\
       \u308B\u6700\u5C0F\u5168\u57DF\u6728"
@@ -28,8 +31,18 @@ data:
     path: Graph/LCA.hpp
     title: "Lowest Common Ancestor / \u6700\u5C0F\u5171\u901A\u7956\u5148"
   - icon: ':heavy_check_mark:'
+    path: Graph/Prim.hpp
+    title: "Prim's algorithm / \u30D7\u30EA\u30E0\u6CD5\u306B\u3088\u308B\u6700\u5C0F\
+      \u5168\u57DF\u6728"
+  - icon: ':heavy_check_mark:'
     path: Graph/UnionFind.hpp
     title: UnionFind
+  - icon: ':heavy_check_mark:'
+    path: Graph/treeDiameter.hpp
+    title: "Tree Diameter / \u6728\u306E\u76F4\u5F84"
+  - icon: ':heavy_check_mark:'
+    path: Graph/treeWalk.hpp
+    title: "Tree Walk / \u4E8C\u5206\u6728\u306E\u5DE1\u56DE"
   - icon: ':heavy_check_mark:'
     path: Math/Combination/combination.hpp
     title: Math/Combination/combination.hpp
@@ -72,6 +85,12 @@ data:
       \u8A08\u7B97\u3059\u308B"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: Data-Structure/cumulative.test.cpp
+    title: Data-Structure/cumulative.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: Data-Structure/cumulative2D.test.cpp
+    title: Data-Structure/cumulative2D.test.cpp
+  - icon: ':heavy_check_mark:'
     path: Enumerate/permutations.test.cpp
     title: Enumerate/permutations.test.cpp
   - icon: ':heavy_check_mark:'
@@ -83,15 +102,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/Floyd-Warshall.test.cpp
     title: Graph/Floyd-Warshall.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/Kruskal.test.cpp
     title: Graph/Kruskal.test.cpp
   - icon: ':heavy_check_mark:'
     path: Graph/LCA.test.cpp
     title: Graph/LCA.test.cpp
   - icon: ':heavy_check_mark:'
+    path: Graph/Prim.test.cpp
+    title: Graph/Prim.test.cpp
+  - icon: ':heavy_check_mark:'
     path: Graph/UnionFind.test.cpp
     title: Graph/UnionFind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: Graph/treeDiameter.test.cpp
+    title: Graph/treeDiameter.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: Graph/treeWalk.test.cpp
+    title: Graph/treeWalk.test.cpp
   - icon: ':heavy_check_mark:'
     path: Math/Combination/combination.test.cpp
     title: Math/Combination/combination.test.cpp
@@ -122,9 +150,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: Sample/add.test.cpp
     title: Sample/add.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"templete.hpp\"\n\n#include <iostream> // cout, endl, cin\n\
@@ -201,8 +229,11 @@ data:
   requiredBy:
   - Graph/LCA.hpp
   - Graph/Kruskal.hpp
+  - Graph/treeWalk.hpp
+  - Graph/Prim.hpp
   - Graph/Bellman-Ford.hpp
   - Graph/UnionFind.hpp
+  - Graph/treeDiameter.hpp
   - Graph/Dijkstra.hpp
   - Graph/Floyd-Warshall.hpp
   - Math/Linear/Matrix.hpp
@@ -217,17 +248,21 @@ data:
   - Math/Combination/pascal.hpp
   - Uncategorized/date.hpp
   - Enumerate/permutations.hpp
+  - Data-Structure/cumulative2D.hpp
   - Data-Structure/cumulative.hpp
   - Sample/add.hpp
   timestamp: '2023-11-14 13:45:06+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Graph/UnionFind.test.cpp
   - Graph/Bellman-Ford.test.cpp
   - Graph/Dijkstra.test.cpp
+  - Graph/treeDiameter.test.cpp
+  - Graph/treeWalk.test.cpp
   - Graph/LCA.test.cpp
   - Graph/Kruskal.test.cpp
   - Graph/Floyd-Warshall.test.cpp
+  - Graph/Prim.test.cpp
   - Math/Linear/Matrix.test.cpp
   - Math/Number-Theory/GCD.test.cpp
   - Math/Number-Theory/CRT.test.cpp
@@ -238,6 +273,8 @@ data:
   - Math/Number-Theory/divisor.test.cpp
   - Math/Combination/combination.test.cpp
   - Enumerate/permutations.test.cpp
+  - Data-Structure/cumulative.test.cpp
+  - Data-Structure/cumulative2D.test.cpp
   - Sample/add.test.cpp
 documentation_of: templete.hpp
 layout: document

@@ -4,18 +4,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: templete.hpp
     title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: Math/Number-Theory/euler.hpp
-    title: "Euler's Phi Function / \u30AA\u30A4\u30E9\u30FC\u306E\u30D5\u30A1\u30A4\
-      \u95A2\u6570"
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: Math/Number-Theory/euler.test.cpp
-    title: Math/Number-Theory/euler.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: Math/Number-Theory/prime-factorize.test.cpp
-    title: Math/Number-Theory/prime-factorize.test.cpp
+    path: Graph/Prim.test.cpp
+    title: Graph/Prim.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -54,46 +47,54 @@ data:
     \ endl; }\n \ntemplate <typename Head, typename... Tail>\nvoid print(Head H, Tail...\
     \ T) {\n  cout << H << \" \";\n  print(T...);\n}\n\n\ntemplate<class T> std::istream\
     \ &operator>>(std::istream &in,vector<T>&A){\n    for(T&a:A){\n        std::cin>>a;\n\
-    \    }\n    return in;\n}\n\n#line 2 \"Math/Number-Theory/prime-factorize.hpp\"\
-    \n\n//\u7D20\u56E0\u6570\u5206\u89E3\nvector<long> factor(long x){\n    vector<long>\
-    \ f(0);\n    for(long i=2;i*i<=x;i++){\n        if(x%i==0){\n            f.push_back(i);\n\
-    \            x/=i;\n            i--;\n        }\n    }\n    if(x>1)f.push_back(x);\n\
-    \    return f;\n}\n\n//\u7D20\u56E0\u6570\u5206\u89E32\n// (\u7D20\u6570,\u6307\
-    \u6570) \u306Epair\nvector<pair<long,long>> factor2(long x){\n    auto f = factor(x);\n\
-    \    vector<pair<long,long>> f2(0);\n    for(auto a:f){\n        if(f2.empty()){\n\
-    \            f2.push_back({a,1});\n        }else if(f2.back().first==a){\n   \
-    \         f2.back().second ++;\n        }else{\n            f2.push_back({a,1});\n\
-    \        }\n    }\n    return f2;\n}\n"
-  code: "# include \"templete.hpp\"\n\n//\u7D20\u56E0\u6570\u5206\u89E3\nvector<long>\
-    \ factor(long x){\n    vector<long> f(0);\n    for(long i=2;i*i<=x;i++){\n   \
-    \     if(x%i==0){\n            f.push_back(i);\n            x/=i;\n          \
-    \  i--;\n        }\n    }\n    if(x>1)f.push_back(x);\n    return f;\n}\n\n//\u7D20\
-    \u56E0\u6570\u5206\u89E32\n// (\u7D20\u6570,\u6307\u6570) \u306Epair\nvector<pair<long,long>>\
-    \ factor2(long x){\n    auto f = factor(x);\n    vector<pair<long,long>> f2(0);\n\
-    \    for(auto a:f){\n        if(f2.empty()){\n            f2.push_back({a,1});\n\
-    \        }else if(f2.back().first==a){\n            f2.back().second ++;\n   \
-    \     }else{\n            f2.push_back({a,1});\n        }\n    }\n    return f2;\n\
-    }\n"
+    \    }\n    return in;\n}\n\n#line 2 \"Graph/Prim.hpp\"\n\nstruct Edge{\n    int\
+    \ from;\n    int to;\n    long cost;\n};\n\nusing Graph = vector<vector<Edge>>;\n\
+    using Pll = pair<long,long>;\n\n/*\u30D7\u30EA\u30E0\u6CD5*/\nstruct Prim{\n \
+    \   Graph G;\n    int V;\n    Prim(int V):V(V){\n        G.resize(V);\n    }\n\
+    \    //\u7121\u5411\u30B0\u30E9\u30D5\uFF01\n    void addEdge(int from,int to,long\
+    \ cost){\n        G[from].push_back({from,to,cost});\n        G[to].push_back({to,from,cost});\n\
+    \    }\n    long long build(){\n        long long res = 0;\n        vector<bool>\
+    \ used(V,false);\n        priority_queue<Pll,vector<Pll>,greater<Pll>> que;\n\
+    \        que.push({0,0});\n        while(!que.empty()){\n            auto [cost,\
+    \ v] = que.top(); que.pop();\n            if(used[v])continue;\n            used[v]\
+    \ = true;\n            res += cost;\n            for(auto& e:G[v]){\n        \
+    \        if(!used[e.to]){\n                    que.push({e.cost,e.to});\n    \
+    \            }\n            }\n        }\n        return res;\n    }\n};\n"
+  code: "# include \"templete.hpp\"\n\nstruct Edge{\n    int from;\n    int to;\n\
+    \    long cost;\n};\n\nusing Graph = vector<vector<Edge>>;\nusing Pll = pair<long,long>;\n\
+    \n/*\u30D7\u30EA\u30E0\u6CD5*/\nstruct Prim{\n    Graph G;\n    int V;\n    Prim(int\
+    \ V):V(V){\n        G.resize(V);\n    }\n    //\u7121\u5411\u30B0\u30E9\u30D5\uFF01\
+    \n    void addEdge(int from,int to,long cost){\n        G[from].push_back({from,to,cost});\n\
+    \        G[to].push_back({to,from,cost});\n    }\n    long long build(){\n   \
+    \     long long res = 0;\n        vector<bool> used(V,false);\n        priority_queue<Pll,vector<Pll>,greater<Pll>>\
+    \ que;\n        que.push({0,0});\n        while(!que.empty()){\n            auto\
+    \ [cost, v] = que.top(); que.pop();\n            if(used[v])continue;\n      \
+    \      used[v] = true;\n            res += cost;\n            for(auto& e:G[v]){\n\
+    \                if(!used[e.to]){\n                    que.push({e.cost,e.to});\n\
+    \                }\n            }\n        }\n        return res;\n    }\n};\n"
   dependsOn:
   - templete.hpp
   isVerificationFile: false
-  path: Math/Number-Theory/prime-factorize.hpp
-  requiredBy:
-  - Math/Number-Theory/euler.hpp
-  timestamp: '2023-11-14 13:45:06+09:00'
+  path: Graph/Prim.hpp
+  requiredBy: []
+  timestamp: '2023-11-16 00:45:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Math/Number-Theory/prime-factorize.test.cpp
-  - Math/Number-Theory/euler.test.cpp
-documentation_of: Math/Number-Theory/prime-factorize.hpp
+  - Graph/Prim.test.cpp
+documentation_of: Graph/Prim.hpp
 layout: document
-title: "prime factorize/ \u7D20\u56E0\u6570\u5206\u89E3"
+title: "Prim's algorithm / \u30D7\u30EA\u30E0\u6CD5\u306B\u3088\u308B\u6700\u5C0F\u5168\
+  \u57DF\u6728"
 ---
 
 ## 概要
-素因数分解を行います。
-昇順の素数のリストを返します。
+最小全域木を求めます。
+
+## 使い方
+- `Prim(n)` : 頂点数`n`に設定します
+- `addEdge(u,v,c)` : 頂点`u`と頂点`v`を結ぶ重み`c`の辺を追加します(無向辺)
+- `build()` : 最小全域木を構築します
 
 ## 計算量
-$O(\sqrt{n})$
-
+頂点数$N$、辺数$M$として、
+- 構築(`build()`) : $O(M\log N)$

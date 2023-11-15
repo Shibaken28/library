@@ -4,18 +4,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: templete.hpp
     title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: Math/Number-Theory/euler.hpp
-    title: "Euler's Phi Function / \u30AA\u30A4\u30E9\u30FC\u306E\u30D5\u30A1\u30A4\
-      \u95A2\u6570"
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: Math/Number-Theory/euler.test.cpp
-    title: Math/Number-Theory/euler.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: Math/Number-Theory/prime-factorize.test.cpp
-    title: Math/Number-Theory/prime-factorize.test.cpp
+    path: Graph/treeWalk.test.cpp
+    title: Graph/treeWalk.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -54,46 +47,53 @@ data:
     \ endl; }\n \ntemplate <typename Head, typename... Tail>\nvoid print(Head H, Tail...\
     \ T) {\n  cout << H << \" \";\n  print(T...);\n}\n\n\ntemplate<class T> std::istream\
     \ &operator>>(std::istream &in,vector<T>&A){\n    for(T&a:A){\n        std::cin>>a;\n\
-    \    }\n    return in;\n}\n\n#line 2 \"Math/Number-Theory/prime-factorize.hpp\"\
-    \n\n//\u7D20\u56E0\u6570\u5206\u89E3\nvector<long> factor(long x){\n    vector<long>\
-    \ f(0);\n    for(long i=2;i*i<=x;i++){\n        if(x%i==0){\n            f.push_back(i);\n\
-    \            x/=i;\n            i--;\n        }\n    }\n    if(x>1)f.push_back(x);\n\
-    \    return f;\n}\n\n//\u7D20\u56E0\u6570\u5206\u89E32\n// (\u7D20\u6570,\u6307\
-    \u6570) \u306Epair\nvector<pair<long,long>> factor2(long x){\n    auto f = factor(x);\n\
-    \    vector<pair<long,long>> f2(0);\n    for(auto a:f){\n        if(f2.empty()){\n\
-    \            f2.push_back({a,1});\n        }else if(f2.back().first==a){\n   \
-    \         f2.back().second ++;\n        }else{\n            f2.push_back({a,1});\n\
-    \        }\n    }\n    return f2;\n}\n"
-  code: "# include \"templete.hpp\"\n\n//\u7D20\u56E0\u6570\u5206\u89E3\nvector<long>\
-    \ factor(long x){\n    vector<long> f(0);\n    for(long i=2;i*i<=x;i++){\n   \
-    \     if(x%i==0){\n            f.push_back(i);\n            x/=i;\n          \
-    \  i--;\n        }\n    }\n    if(x>1)f.push_back(x);\n    return f;\n}\n\n//\u7D20\
-    \u56E0\u6570\u5206\u89E32\n// (\u7D20\u6570,\u6307\u6570) \u306Epair\nvector<pair<long,long>>\
-    \ factor2(long x){\n    auto f = factor(x);\n    vector<pair<long,long>> f2(0);\n\
-    \    for(auto a:f){\n        if(f2.empty()){\n            f2.push_back({a,1});\n\
-    \        }else if(f2.back().first==a){\n            f2.back().second ++;\n   \
-    \     }else{\n            f2.push_back({a,1});\n        }\n    }\n    return f2;\n\
-    }\n"
+    \    }\n    return in;\n}\n\n#line 2 \"Graph/treeWalk.hpp\"\n\nstruct Node{\n\
+    \    int left;\n    int right;\n    int parent = -1;\n    // \u5B58\u5728\u3057\
+    \u306A\u3044\u5834\u5408\u306F-1\n};\n\nusing BinaryTree = vector<Node>;\n\nvoid\
+    \ binaryTreeWalkPre(const BinaryTree &T, vector<int>&order, int &n, int v=0){\n\
+    \    // v: \u73FE\u5728\u306E\u9802\u70B9\u3001 n: \u73FE\u5728\u306E\u756A\u53F7\
+    \n    if(v==-1)return;\n    order[n++] = v;\n    binaryTreeWalkPre(T, order, n,\
+    \ T[v].left);\n    binaryTreeWalkPre(T, order, n, T[v].right);\n}\n\nvoid binaryTreeWalkIn(const\
+    \ BinaryTree &T, vector<int>&order, int &n, int v=0){\n    // v: \u73FE\u5728\u306E\
+    \u9802\u70B9\u3001 n: \u73FE\u5728\u306E\u756A\u53F7\n    if(v==-1)return;\n \
+    \   binaryTreeWalkIn(T, order, n, T[v].left);\n    order[n++] = v;\n    binaryTreeWalkIn(T,\
+    \ order, n, T[v].right);\n}\n\nvoid binaryTreeWalkPost(const BinaryTree &T, vector<int>&order,\
+    \ int &n, int v=0){\n    // v: \u73FE\u5728\u306E\u9802\u70B9\u3001 n: \u73FE\u5728\
+    \u306E\u756A\u53F7\n    if(v==-1)return;\n    binaryTreeWalkPost(T, order, n,\
+    \ T[v].left);\n    binaryTreeWalkPost(T, order, n, T[v].right);\n    order[n++]\
+    \ = v;\n}\n"
+  code: "#include \"templete.hpp\"\n\nstruct Node{\n    int left;\n    int right;\n\
+    \    int parent = -1;\n    // \u5B58\u5728\u3057\u306A\u3044\u5834\u5408\u306F\
+    -1\n};\n\nusing BinaryTree = vector<Node>;\n\nvoid binaryTreeWalkPre(const BinaryTree\
+    \ &T, vector<int>&order, int &n, int v=0){\n    // v: \u73FE\u5728\u306E\u9802\
+    \u70B9\u3001 n: \u73FE\u5728\u306E\u756A\u53F7\n    if(v==-1)return;\n    order[n++]\
+    \ = v;\n    binaryTreeWalkPre(T, order, n, T[v].left);\n    binaryTreeWalkPre(T,\
+    \ order, n, T[v].right);\n}\n\nvoid binaryTreeWalkIn(const BinaryTree &T, vector<int>&order,\
+    \ int &n, int v=0){\n    // v: \u73FE\u5728\u306E\u9802\u70B9\u3001 n: \u73FE\u5728\
+    \u306E\u756A\u53F7\n    if(v==-1)return;\n    binaryTreeWalkIn(T, order, n, T[v].left);\n\
+    \    order[n++] = v;\n    binaryTreeWalkIn(T, order, n, T[v].right);\n}\n\nvoid\
+    \ binaryTreeWalkPost(const BinaryTree &T, vector<int>&order, int &n, int v=0){\n\
+    \    // v: \u73FE\u5728\u306E\u9802\u70B9\u3001 n: \u73FE\u5728\u306E\u756A\u53F7\
+    \n    if(v==-1)return;\n    binaryTreeWalkPost(T, order, n, T[v].left);\n    binaryTreeWalkPost(T,\
+    \ order, n, T[v].right);\n    order[n++] = v;\n}"
   dependsOn:
   - templete.hpp
   isVerificationFile: false
-  path: Math/Number-Theory/prime-factorize.hpp
-  requiredBy:
-  - Math/Number-Theory/euler.hpp
-  timestamp: '2023-11-14 13:45:06+09:00'
+  path: Graph/treeWalk.hpp
+  requiredBy: []
+  timestamp: '2023-11-16 00:45:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Math/Number-Theory/prime-factorize.test.cpp
-  - Math/Number-Theory/euler.test.cpp
-documentation_of: Math/Number-Theory/prime-factorize.hpp
+  - Graph/treeWalk.test.cpp
+documentation_of: Graph/treeWalk.hpp
 layout: document
-title: "prime factorize/ \u7D20\u56E0\u6570\u5206\u89E3"
+title: "Tree Walk / \u4E8C\u5206\u6728\u306E\u5DE1\u56DE"
 ---
 
 ## 概要
-素因数分解を行います。
-昇順の素数のリストを返します。
+木を巡回し、その順番で頂点番号を返します。
 
-## 計算量
-$O(\sqrt{n})$
-
+## 巡回の方法
+- `binaryTreeWalkPre` は pre-order tree walk / 先行順巡回 / 行きがけ順 の順を返します。
+- `binaryTreeWalkIn` は in-order tree walk / 中間順巡回 / 通りがけ順 の順を返します。
+- `binaryTreeWalkPost` は post-order tree walk / 後行順巡回 / 帰りがけ順 の順を返します。

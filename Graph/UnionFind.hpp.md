@@ -1,11 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: templete.hpp
     title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: Graph/Kruskal.hpp
+    title: "Kruskal's algorithm / \u30AF\u30E9\u30B9\u30AB\u30EB\u6CD5\u306B\u3088\
+      \u308B\u6700\u5C0F\u5168\u57DF\u6728"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: Graph/Kruskal.test.cpp
+    title: Graph/Kruskal.test.cpp
   - icon: ':heavy_check_mark:'
     path: Graph/UnionFind.test.cpp
     title: Graph/UnionFind.test.cpp
@@ -95,11 +102,13 @@ data:
   - templete.hpp
   isVerificationFile: false
   path: Graph/UnionFind.hpp
-  requiredBy: []
+  requiredBy:
+  - Graph/Kruskal.hpp
   timestamp: '2023-11-14 13:45:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Graph/UnionFind.test.cpp
+  - Graph/Kruskal.test.cpp
 documentation_of: Graph/UnionFind.hpp
 layout: document
 title: UnionFind

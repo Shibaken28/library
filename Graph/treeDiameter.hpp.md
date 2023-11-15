@@ -4,18 +4,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: templete.hpp
     title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: Math/Number-Theory/euler.hpp
-    title: "Euler's Phi Function / \u30AA\u30A4\u30E9\u30FC\u306E\u30D5\u30A1\u30A4\
-      \u95A2\u6570"
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: Math/Number-Theory/euler.test.cpp
-    title: Math/Number-Theory/euler.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: Math/Number-Theory/prime-factorize.test.cpp
-    title: Math/Number-Theory/prime-factorize.test.cpp
+    path: Graph/treeDiameter.test.cpp
+    title: Graph/treeDiameter.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -54,46 +47,53 @@ data:
     \ endl; }\n \ntemplate <typename Head, typename... Tail>\nvoid print(Head H, Tail...\
     \ T) {\n  cout << H << \" \";\n  print(T...);\n}\n\n\ntemplate<class T> std::istream\
     \ &operator>>(std::istream &in,vector<T>&A){\n    for(T&a:A){\n        std::cin>>a;\n\
-    \    }\n    return in;\n}\n\n#line 2 \"Math/Number-Theory/prime-factorize.hpp\"\
-    \n\n//\u7D20\u56E0\u6570\u5206\u89E3\nvector<long> factor(long x){\n    vector<long>\
-    \ f(0);\n    for(long i=2;i*i<=x;i++){\n        if(x%i==0){\n            f.push_back(i);\n\
-    \            x/=i;\n            i--;\n        }\n    }\n    if(x>1)f.push_back(x);\n\
-    \    return f;\n}\n\n//\u7D20\u56E0\u6570\u5206\u89E32\n// (\u7D20\u6570,\u6307\
-    \u6570) \u306Epair\nvector<pair<long,long>> factor2(long x){\n    auto f = factor(x);\n\
-    \    vector<pair<long,long>> f2(0);\n    for(auto a:f){\n        if(f2.empty()){\n\
-    \            f2.push_back({a,1});\n        }else if(f2.back().first==a){\n   \
-    \         f2.back().second ++;\n        }else{\n            f2.push_back({a,1});\n\
-    \        }\n    }\n    return f2;\n}\n"
-  code: "# include \"templete.hpp\"\n\n//\u7D20\u56E0\u6570\u5206\u89E3\nvector<long>\
-    \ factor(long x){\n    vector<long> f(0);\n    for(long i=2;i*i<=x;i++){\n   \
-    \     if(x%i==0){\n            f.push_back(i);\n            x/=i;\n          \
-    \  i--;\n        }\n    }\n    if(x>1)f.push_back(x);\n    return f;\n}\n\n//\u7D20\
-    \u56E0\u6570\u5206\u89E32\n// (\u7D20\u6570,\u6307\u6570) \u306Epair\nvector<pair<long,long>>\
-    \ factor2(long x){\n    auto f = factor(x);\n    vector<pair<long,long>> f2(0);\n\
-    \    for(auto a:f){\n        if(f2.empty()){\n            f2.push_back({a,1});\n\
-    \        }else if(f2.back().first==a){\n            f2.back().second ++;\n   \
-    \     }else{\n            f2.push_back({a,1});\n        }\n    }\n    return f2;\n\
+    \    }\n    return in;\n}\n\n#line 2 \"Graph/treeDiameter.hpp\"\n\n// \u6728\u306E\
+    \u76F4\u5F84\u3092\u6C42\u3081\u308B\n\nusing CostT = long long;\n\n\nstruct Edge{\n\
+    \    int to;\n    CostT cost;\n};\n\nusing Graph = vector<vector<Edge>>;\n\nvoid\
+    \ dfs(Graph &G,int v,int p,long d,vector<CostT>&dist){\n    // v:\u73FE\u5728\u306E\
+    \u9802\u70B9\n    // p:\u89AA\u306E\u9802\u70B9\n    // d:\u73FE\u5728\u306E\u8DDD\
+    \u96E2\n    dist[v] = d;\n    for(auto& e:G[v]){\n        if(e.to!=p){\n     \
+    \       dfs(G,e.to,v,d+e.cost,dist);\n        }\n    }\n}\n\npair<int,CostT> treeDiameter(Graph\
+    \ &G){\n    // \u6728\u306E\u76F4\u5F84\u3092\u6C42\u3081\u308B\n    // return:\
+    \ (\u76F4\u5F84\u306E\u7AEF\u70B9\u306E\u3046\u3061\u306E\u4E00\u3064,\u76F4\u5F84\
+    \u306E\u91CD\u3055)\n    int n = G.size();\n    vector<CostT> dist(n);\n    dfs(G,0,-1,0,dist);\n\
+    \    int u = max_element(dist.begin(),dist.end())-dist.begin();\n    dfs(G,u,-1,0,dist);\n\
+    \    int v = max_element(dist.begin(),dist.end())-dist.begin();\n    return {v,dist[v]};\n\
+    }\n"
+  code: "# include \"templete.hpp\"\n\n// \u6728\u306E\u76F4\u5F84\u3092\u6C42\u3081\
+    \u308B\n\nusing CostT = long long;\n\n\nstruct Edge{\n    int to;\n    CostT cost;\n\
+    };\n\nusing Graph = vector<vector<Edge>>;\n\nvoid dfs(Graph &G,int v,int p,long\
+    \ d,vector<CostT>&dist){\n    // v:\u73FE\u5728\u306E\u9802\u70B9\n    // p:\u89AA\
+    \u306E\u9802\u70B9\n    // d:\u73FE\u5728\u306E\u8DDD\u96E2\n    dist[v] = d;\n\
+    \    for(auto& e:G[v]){\n        if(e.to!=p){\n            dfs(G,e.to,v,d+e.cost,dist);\n\
+    \        }\n    }\n}\n\npair<int,CostT> treeDiameter(Graph &G){\n    // \u6728\
+    \u306E\u76F4\u5F84\u3092\u6C42\u3081\u308B\n    // return: (\u76F4\u5F84\u306E\
+    \u7AEF\u70B9\u306E\u3046\u3061\u306E\u4E00\u3064,\u76F4\u5F84\u306E\u91CD\u3055\
+    )\n    int n = G.size();\n    vector<CostT> dist(n);\n    dfs(G,0,-1,0,dist);\n\
+    \    int u = max_element(dist.begin(),dist.end())-dist.begin();\n    dfs(G,u,-1,0,dist);\n\
+    \    int v = max_element(dist.begin(),dist.end())-dist.begin();\n    return {v,dist[v]};\n\
     }\n"
   dependsOn:
   - templete.hpp
   isVerificationFile: false
-  path: Math/Number-Theory/prime-factorize.hpp
-  requiredBy:
-  - Math/Number-Theory/euler.hpp
-  timestamp: '2023-11-14 13:45:06+09:00'
+  path: Graph/treeDiameter.hpp
+  requiredBy: []
+  timestamp: '2023-11-16 00:45:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Math/Number-Theory/prime-factorize.test.cpp
-  - Math/Number-Theory/euler.test.cpp
-documentation_of: Math/Number-Theory/prime-factorize.hpp
+  - Graph/treeDiameter.test.cpp
+documentation_of: Graph/treeDiameter.hpp
 layout: document
-title: "prime factorize/ \u7D20\u56E0\u6570\u5206\u89E3"
+title: "Tree Diameter / \u6728\u306E\u76F4\u5F84"
 ---
 
 ## 概要
-素因数分解を行います。
-昇順の素数のリストを返します。
+非負の重みをもつ無向の木構造に対して、最遠頂点間距離(木の直径)を求めます。
 
 ## 計算量
-$O(\sqrt{n})$
+- 頂点数 : $N$
 
+## 原理
+- 適当な頂点$s$から最も遠い頂点$u$を求める
+- $u$から最も遠い頂点$v$を求める
+- $u$と$v$の距離が木の直径
