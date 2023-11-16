@@ -4,7 +4,7 @@ using Graph = vector<vector<int>>;
 struct StronglyConnectedComponents{
     Graph &G;
     Graph invG;
-    vector<int> ord, inv;
+    vector<int> ord, visit, inv;
     vector<vector<int>> groups;
     StronglyConnectedComponents(Graph &_G): G(_G){
         int v = (int)G.size();
@@ -17,32 +17,32 @@ struct StronglyConnectedComponents{
         // DFSをする
         ord.resize(v, -1);
         inv.resize(v, -1);
+        visit.resize(v, 0);
         int k = 0;
         for(int i=0;i<v;i++){
             if(ord[i]==-1)k = dfs(i, k);
         }
-
         for(int i=0;i<v;i++){
             inv[ord[i]] = i;
             ord[i] = -1;
         }
         // 辺を逆向きにしてDFS
         k = 0;
-        for(int i=0;i<v;i++){
-            if(ord[i]==-1){
+        for(int i=v-1;i>=0;i--){
+            if(ord[inv[i]]==-1){
                 vector<int> group(0);
-                k = dfs2(i, k, group);
+                k = dfs2(inv[i], k, group);
                 groups.push_back(group);  
             }
         }
     }
     int dfs(int n, int k){
-        ord[n] = k++;
+        if(visit[n])return k;
+        visit[n] = 1;
         for(auto&e:G[n]){
-            if(ord[e]==-1){
-                k = dfs(e, k);
-            }
+            k = dfs(e, k);
         }
+        ord[n] = k++;
         return k;
     }
     int dfs2(int n,int k, vector<int>&group){
@@ -50,7 +50,7 @@ struct StronglyConnectedComponents{
         ord[n] = k++;
         for(auto&e:invG[n]){
             if(ord[e]==-1){
-                k = dfs(e, k);
+                k = dfs2(e, k, group);
             }
         }
         return k;

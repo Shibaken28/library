@@ -1,0 +1,102 @@
+[INFO] online-judge-tools 11.5.1 (+ online-judge-api-client 10.10.1)
+[INFO] 24 cases found
+
+[INFO] 00_sample_00.in
+[INFO] time: 0.005240 sec
+[SUCCESS] AC
+
+[INFO] 01_small_00.in
+[INFO] time: 0.004522 sec
+[SUCCESS] AC
+
+[INFO] 01_small_01.in
+[INFO] time: 0.004313 sec
+[SUCCESS] AC
+
+[INFO] 01_small_02.in
+[INFO] time: 0.005693 sec
+[SUCCESS] AC
+
+[INFO] 01_small_03.in
+[INFO] time: 0.004484 sec
+[SUCCESS] AC
+
+[INFO] 02_medium_00.in
+[INFO] time: 0.004347 sec
+[SUCCESS] AC
+
+[INFO] 02_medium_01.in
+[INFO] time: 0.004879 sec
+[SUCCESS] AC
+
+[INFO] 03_sparse_00.in
+[INFO] time: 0.004403 sec
+[SUCCESS] AC
+
+[INFO] 03_sparse_01.in
+[INFO] time: 0.005951 sec
+[SUCCESS] AC
+
+[INFO] 03_sparse_02.in
+[INFO] time: 0.004987 sec
+[SUCCESS] AC
+
+[INFO] 03_sparse_03.in
+[INFO] time: 0.005400 sec
+[SUCCESS] AC
+
+[INFO] 04_dense_00.in
+[INFO] time: 0.004978 sec
+[SUCCESS] AC
+
+[INFO] 04_dense_01.in
+[INFO] time: 0.004676 sec
+[SUCCESS] AC
+
+[INFO] 04_dense_02.in
+[INFO] time: 0.006298 sec
+[SUCCESS] AC
+
+[INFO] 04_dense_03.in
+[INFO] time: 0.008895 sec
+[SUCCESS] AC
+
+[INFO] 05_rand_00.in
+[INFO] time: 0.010085 sec
+[SUCCESS] AC
+
+[INFO] 05_rand_01.in
+[INFO] time: 0.010025 sec
+[SUCCESS] AC
+
+[INFO] 05_rand_02.in
+[INFO] time: 0.017889 sec
+[SUCCESS] AC
+
+[INFO] 06_linear_00.in
+[INFO] time: 0.069529 sec
+[SUCCESS] AC
+
+[INFO] 06_linear_01.in
+[INFO] time: 0.073676 sec
+[SUCCESS] AC
+
+[INFO] 07_linear_00.in
+[INFO] time: 0.069215 sec
+[SUCCESS] AC
+
+[INFO] 07_linear_01.in
+[INFO] time: 0.076400 sec
+[SUCCESS] AC
+
+[INFO] 08_grid_00.in
+[INFO] time: 0.082892 sec
+[SUCCESS] AC
+
+[INFO] 08_grid_01.in
+[INFO] time: 0.129445 sec
+[SUCCESS] AC
+
+[INFO] slowest: 0.129445 sec  (for 08_grid_01.in)
+[INFO] max memory: 5.072000 MB  (for 07_linear_00.in)
+[SUCCESS] test success: 24 cases
