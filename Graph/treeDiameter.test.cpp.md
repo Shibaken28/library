@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/treeDiameter.hpp
     title: "Tree Diameter / \u6728\u306E\u76F4\u5F84"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: templete.hpp
     title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []

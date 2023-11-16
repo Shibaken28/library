@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Enumerate/permutations.hpp
     title: "enumerate permutations / \u9806\u5217\u5217\u6319"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: templete.hpp
     title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []

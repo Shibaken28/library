@@ -5,7 +5,7 @@ data:
     path: Math/Number-Theory/GCD.hpp
     title: "GCD, LCM / \u6700\u5927\u516C\u7D04\u6570\u3068\u6700\u5C0F\u516C\u500D\
       \u6570"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: templete.hpp
     title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []

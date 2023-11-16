@@ -5,7 +5,7 @@ data:
     path: Graph/Prim.hpp
     title: "Prim's algorithm / \u30D7\u30EA\u30E0\u6CD5\u306B\u3088\u308B\u6700\u5C0F\
       \u5168\u57DF\u6728"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: templete.hpp
     title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []

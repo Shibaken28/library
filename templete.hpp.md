@@ -15,9 +15,12 @@ data:
     path: Enumerate/permutations.hpp
     title: "enumerate permutations / \u9806\u5217\u5217\u6319"
   - icon: ':heavy_check_mark:'
+    path: Graph/2SAT.hpp
+    title: "2-SAT / \u5145\u8DB3\u53EF\u80FD\u6027\u554F\u984C"
+  - icon: ':heavy_check_mark:'
     path: Graph/Bellman-Ford.hpp
     title: "Bellman-Ford algorithm / \u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\
-      \u6CD5\u306B\u3088\u308B\u6700\u77ED\u7D4C"
+      \u6CD5\u306B\u3088\u308B\u6700\u77ED\u7D4C\u8DEF"
   - icon: ':heavy_check_mark:'
     path: Graph/Dijkstra.hpp
     title: "Dijkstra's algorithm / \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\u306B\
@@ -38,8 +41,18 @@ data:
     title: "Prim's algorithm / \u30D7\u30EA\u30E0\u6CD5\u306B\u3088\u308B\u6700\u5C0F\
       \u5168\u57DF\u6728"
   - icon: ':heavy_check_mark:'
+    path: Graph/SCC.hpp
+    title: "Strongly Connected Components / \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
+  - icon: ':heavy_check_mark:'
     path: Graph/UnionFind.hpp
     title: UnionFind
+  - icon: ':heavy_check_mark:'
+    path: Graph/lowlink.hpp
+    title: "Lowlink / \u30B0\u30E9\u30D5\u306E\u95A2\u7BC0\u70B9\u30FB\u6A4B\u306E\
+      \u691C\u51FA"
+  - icon: ':x:'
+    path: Graph/topological.hpp
+    title: Graph/topological.hpp
   - icon: ':heavy_check_mark:'
     path: Graph/treeDiameter.hpp
     title: "Tree Diameter / \u6728\u306E\u76F4\u5F84"
@@ -100,6 +113,9 @@ data:
     path: Enumerate/permutations.test.cpp
     title: Enumerate/permutations.test.cpp
   - icon: ':heavy_check_mark:'
+    path: Graph/2SAT.test.cpp
+    title: Graph/2SAT.test.cpp
+  - icon: ':heavy_check_mark:'
     path: Graph/Bellman-Ford.test.cpp
     title: Graph/Bellman-Ford.test.cpp
   - icon: ':heavy_check_mark:'
@@ -118,8 +134,20 @@ data:
     path: Graph/Prim.test.cpp
     title: Graph/Prim.test.cpp
   - icon: ':heavy_check_mark:'
+    path: Graph/SCC.test.cpp
+    title: Graph/SCC.test.cpp
+  - icon: ':heavy_check_mark:'
     path: Graph/UnionFind.test.cpp
     title: Graph/UnionFind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: Graph/articulation.test.cpp
+    title: Graph/articulation.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: Graph/bridge.test.cpp
+    title: Graph/bridge.test.cpp
+  - icon: ':x:'
+    path: Graph/topological.test.cpp
+    title: Graph/topological.test.cpp
   - icon: ':heavy_check_mark:'
     path: Graph/treeDiameter.test.cpp
     title: Graph/treeDiameter.test.cpp
@@ -156,9 +184,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: Sample/add.test.cpp
     title: Sample/add.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"templete.hpp\"\n\n#include <iostream> // cout, endl, cin\n\
@@ -237,8 +265,12 @@ data:
   - Graph/Kruskal.hpp
   - Graph/treeWalk.hpp
   - Graph/Prim.hpp
+  - Graph/lowlink.hpp
   - Graph/Bellman-Ford.hpp
   - Graph/UnionFind.hpp
+  - Graph/2SAT.hpp
+  - Graph/topological.hpp
+  - Graph/SCC.hpp
   - Graph/treeDiameter.hpp
   - Graph/Dijkstra.hpp
   - Graph/Floyd-Warshall.hpp
@@ -259,16 +291,21 @@ data:
   - Data-Structure/cumulative.hpp
   - Sample/add.hpp
   timestamp: '2023-11-14 13:45:06+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - Graph/UnionFind.test.cpp
   - Graph/Bellman-Ford.test.cpp
+  - Graph/SCC.test.cpp
   - Graph/Dijkstra.test.cpp
+  - Graph/2SAT.test.cpp
+  - Graph/topological.test.cpp
   - Graph/treeDiameter.test.cpp
   - Graph/treeWalk.test.cpp
   - Graph/LCA.test.cpp
   - Graph/Kruskal.test.cpp
+  - Graph/bridge.test.cpp
   - Graph/Floyd-Warshall.test.cpp
+  - Graph/articulation.test.cpp
   - Graph/Prim.test.cpp
   - Math/Linear/Matrix.test.cpp
   - Math/Number-Theory/GCD.test.cpp

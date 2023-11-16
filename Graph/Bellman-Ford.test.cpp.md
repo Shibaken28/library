@@ -4,8 +4,8 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/Bellman-Ford.hpp
     title: "Bellman-Ford algorithm / \u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\
-      \u6CD5\u306B\u3088\u308B\u6700\u77ED\u7D4C"
-  - icon: ':heavy_check_mark:'
+      \u6CD5\u306B\u3088\u308B\u6700\u77ED\u7D4C\u8DEF"
+  - icon: ':question:'
     path: templete.hpp
     title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []

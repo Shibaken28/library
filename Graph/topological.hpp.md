@@ -1,24 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: Sample/add.hpp
-    title: "Sample / \u8DB3\u3057\u7B97\u306E\u30B5\u30F3\u30D7\u30EB"
   - icon: ':question:'
     path: templete.hpp
     title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
-  _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: Graph/topological.test.cpp
+    title: Graph/topological.test.cpp
+  _isVerificationFailed: true
+  _pathExtension: hpp
+  _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/aplusb
-    links:
-    - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"Sample/add.test.cpp\"\n# define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\
-    \n# include <iostream>\n#line 2 \"templete.hpp\"\n\n#line 4 \"templete.hpp\"\n\
+    links: []
+  bundledCode: "#line 2 \"templete.hpp\"\n\n#include <iostream> // cout, endl, cin\n\
     #include <string> // string, to_string, stoi\n#include <vector> // vector\n#include\
     \ <algorithm> // min, max, swap, sort, reverse, lower_bound, upper_bound\n#include\
     \ <utility> // pair, make_pair\n#include <tuple> // tuple, make_tuple\n#include\
@@ -51,26 +47,47 @@ data:
     \ endl; }\n \ntemplate <typename Head, typename... Tail>\nvoid print(Head H, Tail...\
     \ T) {\n  cout << H << \" \";\n  print(T...);\n}\n\n\ntemplate<class T> std::istream\
     \ &operator>>(std::istream &in,vector<T>&A){\n    for(T&a:A){\n        std::cin>>a;\n\
-    \    }\n    return in;\n}\n\n#line 2 \"Sample/add.hpp\"\n\nint sum(int a, int\
-    \ b){\n    return a + b;\n}\n#line 4 \"Sample/add.test.cpp\"\nusing namespace\
-    \ std;\n\nint main(){\n    int a, b;\n    cin >> a >> b;\n    cout << sum(a, b)\
-    \ << endl;\n}\n"
-  code: "# define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n# include <iostream>\n\
-    # include \"add.hpp\"\nusing namespace std;\n\nint main(){\n    int a, b;\n  \
-    \  cin >> a >> b;\n    cout << sum(a, b) << endl;\n}\n"
+    \    }\n    return in;\n}\n\n#line 2 \"Graph/topological.hpp\"\n\nusing Graph\
+    \ = vector<vector<int>>;\n// \u30B0\u30E9\u30D5\u304CDAG\u3067\u3042\u308B\n//\
+    \ \u30C8\u30DD\u30ED\u30B8\u30AB\u30EB\u30BD\u30FC\u30C8\nvector<int> topologicalSort(Graph\
+    \ &G){\n    // \u5165\u6B21\u6570\u3092\u6570\u3048\u308B\n    vector<int> in(G.size(),0);\n\
+    \    for(auto&g:G){\n        for(auto&h:g){\n            in[h]++;\n        }\n\
+    \    }\n    // \u5165\u6B21\u6570\u304C0\u306E\u3082\u306E\u3092\u30AD\u30E5\u30FC\
+    \u306B\u5165\u308C\u308B\n    queue<int> q;\n    for(int i=0;i<(int)G.size();i++){\n\
+    \        if(in[i]==0){\n            q.push(i);\n        }\n    }\n    // \u5165\
+    \u6B21\u6570\u304C0\u306E\u3082\u306E\u3092\u53D6\u308A\u51FA\u3057\u3066\u3001\
+    \u305D\u306E\u9802\u70B9\u304B\u3089\u51FA\u3066\u3044\u308B\u8FBA\u3092\u524A\
+    \u9664\u3059\u308B\n    vector<int> ans;\n    while(!q.empty()){\n        int\
+    \ n=q.front(); q.pop();\n        ans.push_back(n);\n        for(auto&g:G[n]){\n\
+    \            in[g]--;\n            if(in[g]==0){\n                q.push(g);\n\
+    \            }\n        }\n    }\n    return ans;\n}\n"
+  code: "# include \"templete.hpp\"\n\nusing Graph = vector<vector<int>>;\n// \u30B0\
+    \u30E9\u30D5\u304CDAG\u3067\u3042\u308B\n// \u30C8\u30DD\u30ED\u30B8\u30AB\u30EB\
+    \u30BD\u30FC\u30C8\nvector<int> topologicalSort(Graph &G){\n    // \u5165\u6B21\
+    \u6570\u3092\u6570\u3048\u308B\n    vector<int> in(G.size(),0);\n    for(auto&g:G){\n\
+    \        for(auto&h:g){\n            in[h]++;\n        }\n    }\n    // \u5165\
+    \u6B21\u6570\u304C0\u306E\u3082\u306E\u3092\u30AD\u30E5\u30FC\u306B\u5165\u308C\
+    \u308B\n    queue<int> q;\n    for(int i=0;i<(int)G.size();i++){\n        if(in[i]==0){\n\
+    \            q.push(i);\n        }\n    }\n    // \u5165\u6B21\u6570\u304C0\u306E\
+    \u3082\u306E\u3092\u53D6\u308A\u51FA\u3057\u3066\u3001\u305D\u306E\u9802\u70B9\
+    \u304B\u3089\u51FA\u3066\u3044\u308B\u8FBA\u3092\u524A\u9664\u3059\u308B\n   \
+    \ vector<int> ans;\n    while(!q.empty()){\n        int n=q.front(); q.pop();\n\
+    \        ans.push_back(n);\n        for(auto&g:G[n]){\n            in[g]--;\n\
+    \            if(in[g]==0){\n                q.push(g);\n            }\n      \
+    \  }\n    }\n    return ans;\n}\n"
   dependsOn:
-  - Sample/add.hpp
   - templete.hpp
-  isVerificationFile: true
-  path: Sample/add.test.cpp
+  isVerificationFile: false
+  path: Graph/topological.hpp
   requiredBy: []
-  timestamp: '2023-11-14 13:45:06+09:00'
-  verificationStatus: TEST_ACCEPTED
-  verifiedWith: []
-documentation_of: Sample/add.test.cpp
+  timestamp: '2023-11-16 21:58:22+09:00'
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - Graph/topological.test.cpp
+documentation_of: Graph/topological.hpp
 layout: document
 redirect_from:
-- /verify/Sample/add.test.cpp
-- /verify/Sample/add.test.cpp.html
-title: Sample/add.test.cpp
+- /library/Graph/topological.hpp
+- /library/Graph/topological.hpp.html
+title: Graph/topological.hpp
 ---
