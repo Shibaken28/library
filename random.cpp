@@ -1,4 +1,4 @@
-#line 1 "Data-Structure/BIT.test.cpp"
+#line 1 "Graph/SCC.test.cpp"
 #line 2 "templete.hpp"
 
 #include <iostream> // cout, endl, cin
@@ -115,56 +115,85 @@ template<class T> std::istream &operator>>(std::istream &in,vector<T>&A){
     return in;
 }
 
-#line 2 "Data-Structure/BIT.hpp"
+#line 2 "Graph/SCC.hpp"
 
-// Binary Indexed Tree
-template<typename T> struct BinaryIndexedTree{
-    // 1-indexed
-    size_t n;
-    vector<T> A;
-    BinaryIndexedTree(size_t n){
-        this->n=n;
-        init();
-    };
-    void init(){
-        A.resize(n+1);
-        for(int i=0;i<=n;i++){
-            A[i]=0;
+using Graph = vector<vector<int>>;
+struct StronglyConnectedComponents{
+    Graph &G;
+    Graph invG;
+    vector<int> ord, inv;
+    vector<vector<int>> groups;
+    StronglyConnectedComponents(Graph &_G): G(_G){
+        int v = (int)G.size();
+        invG.resize(v);
+        for(int i=0;i<v;i++){
+            for(auto&g:G[i]){
+                invG[g].push_back(i);
+            }
+        }
+        // DFSをする
+        ord.resize(v, -1);
+        inv.resize(v, -1);
+        int k = 0;
+        for(int i=0;i<v;i++){
+            if(ord[i]==-1)k = dfs(i, k);
+        }
+
+        for(int i=0;i<v;i++){
+            inv[ord[i]] = i;
+            ord[i] = -1;
+        }
+        // 辺を逆向きにしてDFS
+        k = 0;
+        for(int i=0;i<v;i++){
+            if(ord[i]==-1){
+                vector<int> group(0);
+                k = dfs2(i, k, group);
+                groups.push_back(group);  
+            }
         }
     }
-    // 一点加算と区間和
-    void add(int i,T x){
-        while(i<=n){
-            A[i]+=x;
-            i+=i&-i;
+    int dfs(int n, int k){
+        ord[n] = k++;
+        for(auto&e:G[n]){
+            if(ord[e]==-1){
+                k = dfs(e, k);
+            }
         }
+        return k;
     }
-    T query(int i){
-        T res=0;
-        while(i>0){
-            res+=A[i];
-            i-=i&-i;
+    int dfs2(int n,int k, vector<int>&group){
+        group.push_back(n);
+        ord[n] = k++;
+        for(auto&e:invG[n]){
+            if(ord[e]==-1){
+                k = dfs2(e, k, group);
+            }
         }
-        return res;
-    }
-    // [l,r]の総和を求める
-    T query(int l,int r){
-        return query(r)-query(l-1);
+        return k;
     }
 };
-#line 3 "Data-Structure/BIT.test.cpp"
+#line 3 "Graph/SCC.test.cpp"
 
 int main(){
-    // 1-indexed
-    int N,Q;cin>>N>>Q;
-    BinaryIndexedTree<long> bit(N);
-    for(int i=0;i<Q;i++){
-        int c,x,y;cin>>c>>x>>y;
-        if(c==0){
-            bit.add(x,y);
-        }else{
-            cout<<bit.query(x,y)<<endl;
+    int n,m;
+    cin >> n >> m;
+    Graph g(n);
+    for(int i=0;i<m;i++){
+        int a,b;
+        cin >> a >> b;
+        g[a].push_back(b);
+    }
+    StronglyConnectedComponents scc(g);
+    vector<int> num(n,0); //どの強連結成分に含まれているか
+    for(int i=0;i<(int)scc.groups.size();i++){
+        for(auto&v:scc.groups[i]){
+            num[v] = i;
         }
     }
+    int q;cin>>q;
+    for(int i=0;i<q;i++){
+        int s,t;cin>>s>>t;
+        cout << (num[s] == num[t]) << endl;
+    }
 }
-

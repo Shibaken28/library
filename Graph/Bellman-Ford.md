@@ -1,5 +1,5 @@
 ---
-title: Bellman-Ford algorithm / ベルマンフォード法による最短経
+title: Bellman-Ford algorithm / ベルマンフォード法による最短経路
 documentation_of: ./Bellman-Ford.hpp
 ---
 
