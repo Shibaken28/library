@@ -112,7 +112,7 @@ data:
     \ j=0;j<m;++j)cin>>A.val[i][j].val;\n    for(int i=0;i<m;++i)for(int j=0;j<k;++j)cin>>B.val[i][j].val;\n\
     \    auto C=A*B;\n    for(int i=0;i<n;++i){\n        for(int j=0;j<k;++j){\n \
     \           cout<<(j?\" \":\"\")<<C.val[i][j].val;\n        }\n        cout<<endl;\n\
-    \    }\n    return 0;\n}\n"
+    \    }\n    return 0;\n}\n\n"
   code: "# define PROBLEM \"https://judge.yosupo.jp/problem/matrix_product\"\nusing\
     \ namespace std;\n# include <iostream>\n# include \"../Mod/mint.hpp\"\n# include\
     \ \"Matrix.hpp\"\n\nusing mint = Fp<998244353>;\n\nint main(){\n    int n,m,k;cin>>n>>m>>k;\n\
@@ -120,7 +120,7 @@ data:
     \    for(int i=0;i<m;++i)for(int j=0;j<k;++j)cin>>B.val[i][j].val;\n    auto C=A*B;\n\
     \    for(int i=0;i<n;++i){\n        for(int j=0;j<k;++j){\n            cout<<(j?\"\
     \ \":\"\")<<C.val[i][j].val;\n        }\n        cout<<endl;\n    }\n    return\
-    \ 0;\n}\n"
+    \ 0;\n}\n\n"
   dependsOn:
   - Math/Mod/mint.hpp
   - Math/Linear/Matrix.hpp
@@ -128,7 +128,7 @@ data:
   isVerificationFile: true
   path: Math/Linear/Matrix.test.cpp
   requiredBy: []
-  timestamp: '2023-11-14 13:45:06+09:00'
+  timestamp: '2023-12-30 18:30:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Math/Linear/Matrix.test.cpp

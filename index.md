@@ -52,7 +52,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/UnionFind.hpp
       title: UnionFind
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
+      path: Graph/connected.hpp
+      title: "Connected Components / \u9023\u7D50\u6210\u5206\u5206\u89E3"
+    - icon: ':x:'
       path: Graph/lowlink.hpp
       title: "Lowlink / \u30B0\u30E9\u30D5\u306E\u95A2\u7BC0\u70B9\u30FB\u6A4B\u306E\
         \u691C\u51FA"
@@ -65,6 +68,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/treeWalk.hpp
       title: "Tree Walk / \u4E8C\u5206\u6728\u306E\u5DE1\u56DE"
+    - icon: ':x:'
+      path: Graph/twoEdgeConnected.hpp
+      title: "Two Edge Connected Components / \u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\
+        \u5206\u5206\u89E3"
   - name: Math/Combination
     pages:
     - icon: ':heavy_check_mark:'
@@ -184,10 +191,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/UnionFind.test.cpp
       title: Graph/UnionFind.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Graph/articulation.test.cpp
       title: Graph/articulation.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Graph/bridge.test.cpp
       title: Graph/bridge.test.cpp
     - icon: ':x:'
@@ -199,6 +206,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/treeWalk.test.cpp
       title: Graph/treeWalk.test.cpp
+    - icon: ':x:'
+      path: Graph/twoEdgeConnected.test.cpp
+      title: Graph/twoEdgeConnected.test.cpp
   - name: Math/Combination
     pages:
     - icon: ':heavy_check_mark:'

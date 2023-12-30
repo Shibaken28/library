@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':x:'
+    path: Graph/connected.hpp
+    title: "Connected Components / \u9023\u7D50\u6210\u5206\u5206\u89E3"
+  - icon: ':x:'
     path: Graph/lowlink.hpp
     title: "Lowlink / \u30B0\u30E9\u30D5\u306E\u95A2\u7BC0\u70B9\u30FB\u6A4B\u306E\
       \u691C\u51FA"
@@ -9,17 +12,16 @@ data:
     path: templete.hpp
     title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: Graph/twoEdgeConnected.test.cpp
+    title: Graph/twoEdgeConnected.test.cpp
   _isVerificationFailed: true
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_3_B
-    links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_3_B
-  bundledCode: "#line 1 \"Graph/bridge.test.cpp\"\n# define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_3_B\"\
-    \n# include <iostream>\n#line 2 \"templete.hpp\"\n\n#line 4 \"templete.hpp\"\n\
+    links: []
+  bundledCode: "#line 2 \"templete.hpp\"\n\n#include <iostream> // cout, endl, cin\n\
     #include <string> // string, to_string, stoi\n#include <vector> // vector\n#include\
     \ <algorithm> // min, max, swap, sort, reverse, lower_bound, upper_bound\n#include\
     \ <utility> // pair, make_pair\n#include <tuple> // tuple, make_tuple\n#include\
@@ -81,32 +83,60 @@ data:
     \     low[n] = min(low[n], ord[e]); //\u30EB\u30FC\u30D7\u691C\u51FA\n       \
     \     }\n        }\n        if(par == -1 && cnt > 1) is_articulation = true; //\u6839\
     \n        if(is_articulation) articulation.push_back(n);\n        return c;\n\
-    \    }\n};\n#line 4 \"Graph/bridge.test.cpp\"\nusing namespace std;\n\nint main(){\n\
-    \    int v,e; cin>>v>>e;\n    Graph G(v);\n    for(int i=0;i<e;i++){\n       \
-    \ int s,t; cin>>s>>t;\n        G[s].push_back(t);\n        G[t].push_back(s);\n\
-    \    }\n    Lowlink lowlink(G);\n    sort(lowlink.bridge.begin(), lowlink.bridge.end());\n\
-    \    for(auto& x : lowlink.bridge) cout << x.first << \" \" << x.second << endl;\n\
-    }\n\n"
-  code: "# define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_3_B\"\
-    \n# include <iostream>\n# include \"lowlink.hpp\"\nusing namespace std;\n\nint\
-    \ main(){\n    int v,e; cin>>v>>e;\n    Graph G(v);\n    for(int i=0;i<e;i++){\n\
-    \        int s,t; cin>>s>>t;\n        G[s].push_back(t);\n        G[t].push_back(s);\n\
-    \    }\n    Lowlink lowlink(G);\n    sort(lowlink.bridge.begin(), lowlink.bridge.end());\n\
-    \    for(auto& x : lowlink.bridge) cout << x.first << \" \" << x.second << endl;\n\
-    }\n\n"
+    \    }\n};\n#line 2 \"Graph/connected.hpp\"\n\nusing Graph = vector<vector<int>>;\n\
+    \n// \u9023\u7D50\u6210\u5206\u3092\u6C42\u3081\u308B\nstruct ConnectedComponents{\n\
+    \    int v;\n    vector<vector<int>> groups;\n    vector<int> id;\n    Graph &G;\n\
+    \    ConnectedComponents(Graph &G) : G(G) {\n        v = (int)G.size();\n    \
+    \    id.resize(v, -1);\n        int k = 0;\n        for(int i = 0; i < v; i++){\n\
+    \            if(id[i] == -1){\n                vector<int> group;\n          \
+    \      dfs(i, k, group);\n                k++;\n                groups.push_back(group);\n\
+    \            }\n        }\n    }\n\n    void dfs(int n, int k, vector<int> &group){\n\
+    \        id[n] = k;\n        group.push_back(n);\n        for(auto& e : G[n]){\n\
+    \            if(id[e] == -1) dfs(e, k, group);\n        }\n    }\n};\n#line 3\
+    \ \"Graph/twoEdgeConnected.hpp\"\n\n// \u4E8C\u8FBA\u9023\u7D50\u6210\u5206\u5206\
+    \u89E3\nstruct TwoEdgeConnectedComponents{\n    int v;\n    vector<vector<int>>\
+    \ groups;\n    Graph &G;\n    Lowlink lowlink;\n    TwoEdgeConnectedComponents(Graph\
+    \ G) : G(G), lowlink(G){\n        v = (int)G.size();\n        \n        set<pair<int,\
+    \ int>> bridge;\n        for(auto& e : lowlink.bridge) bridge.insert(e);\n   \
+    \     // bridge\u3092\u524A\u9664\u3057\u305F\u30B0\u30E9\u30D5\u3092\u4F5C\u308B\
+    \n        Graph g(v);\n        for(int i = 0; i < v; i++){\n            for(auto&\
+    \ e : G[i]){\n                // \u6A4B\u3067\u306A\u3044\u8FBA\u3092\u8FFD\u52A0\
+    \n                if(bridge.count({min(i, e), max(i, e)}) == 0){\n           \
+    \         g[i].push_back(e);\n                }\n            }\n        }\n\n\
+    \        // \u9023\u7D50\u6210\u5206\u5206\u89E3\n        ConnectedComponents\
+    \ cc(g);\n        groups = cc.groups;\n    }\n};\n"
+  code: "# include \"lowlink.hpp\"\n# include \"connected.hpp\"\n\n// \u4E8C\u8FBA\
+    \u9023\u7D50\u6210\u5206\u5206\u89E3\nstruct TwoEdgeConnectedComponents{\n   \
+    \ int v;\n    vector<vector<int>> groups;\n    Graph &G;\n    Lowlink lowlink;\n\
+    \    TwoEdgeConnectedComponents(Graph G) : G(G), lowlink(G){\n        v = (int)G.size();\n\
+    \        \n        set<pair<int, int>> bridge;\n        for(auto& e : lowlink.bridge)\
+    \ bridge.insert(e);\n        // bridge\u3092\u524A\u9664\u3057\u305F\u30B0\u30E9\
+    \u30D5\u3092\u4F5C\u308B\n        Graph g(v);\n        for(int i = 0; i < v; i++){\n\
+    \            for(auto& e : G[i]){\n                // \u6A4B\u3067\u306A\u3044\
+    \u8FBA\u3092\u8FFD\u52A0\n                if(bridge.count({min(i, e), max(i, e)})\
+    \ == 0){\n                    g[i].push_back(e);\n                }\n        \
+    \    }\n        }\n\n        // \u9023\u7D50\u6210\u5206\u5206\u89E3\n       \
+    \ ConnectedComponents cc(g);\n        groups = cc.groups;\n    }\n};"
   dependsOn:
   - Graph/lowlink.hpp
   - templete.hpp
-  isVerificationFile: true
-  path: Graph/bridge.test.cpp
+  - Graph/connected.hpp
+  isVerificationFile: false
+  path: Graph/twoEdgeConnected.hpp
   requiredBy: []
   timestamp: '2023-12-30 18:30:06+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
-  verifiedWith: []
-documentation_of: Graph/bridge.test.cpp
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - Graph/twoEdgeConnected.test.cpp
+documentation_of: Graph/twoEdgeConnected.hpp
 layout: document
-redirect_from:
-- /verify/Graph/bridge.test.cpp
-- /verify/Graph/bridge.test.cpp.html
-title: Graph/bridge.test.cpp
+title: "Two Edge Connected Components / \u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\
+  \u5206\u89E3"
 ---
+
+## 概要
+二重辺連結成分分解を行います。
+
+## 計算量
+- 頂点数$N$、辺数$M$として、$O(N+M\log M)$  
+    - 実装をサボったので$\log M$がついています

@@ -72,9 +72,9 @@ data:
   timestamp: '2023-11-14 13:45:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - Math/Number-Theory/LCM.test.cpp
   - Math/Number-Theory/GCD.test.cpp
   - Math/Number-Theory/CRT.test.cpp
-  - Math/Number-Theory/LCM.test.cpp
 documentation_of: Math/Number-Theory/GCD.hpp
 layout: document
 title: "GCD, LCM / \u6700\u5927\u516C\u7D04\u6570\u3068\u6700\u5C0F\u516C\u500D\u6570"

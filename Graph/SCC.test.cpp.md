@@ -14,10 +14,10 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_3_C
+    PROBLEM: https://judge.yosupo.jp/problem/scc
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_3_C
-  bundledCode: "#line 1 \"Graph/SCC.test.cpp\"\n# define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_3_C\"\
+    - https://judge.yosupo.jp/problem/scc
+  bundledCode: "#line 1 \"Graph/SCC.test.cpp\"\n# define PROBLEM \"https://judge.yosupo.jp/problem/scc\"\
     \n#line 2 \"templete.hpp\"\n\n#include <iostream> // cout, endl, cin\n#include\
     \ <string> // string, to_string, stoi\n#include <vector> // vector\n#include <algorithm>\
     \ // min, max, swap, sort, reverse, lower_bound, upper_bound\n#include <utility>\
@@ -73,27 +73,23 @@ data:
     \   }\n};\n#line 3 \"Graph/SCC.test.cpp\"\n\nint main(){\n    int n,m;\n    cin\
     \ >> n >> m;\n    Graph g(n);\n    for(int i=0;i<m;i++){\n        int a,b;\n \
     \       cin >> a >> b;\n        g[a].push_back(b);\n    }\n    StronglyConnectedComponents\
-    \ scc(g);\n    vector<int> num(n,-1); //\u3069\u306E\u5F37\u9023\u7D50\u6210\u5206\
-    \u306B\u542B\u307E\u308C\u3066\u3044\u308B\u304B\n    for(int i=0;i<(int)scc.groups.size();i++){\n\
-    \        for(auto&v:scc.groups[i]){\n            num[v] = i;\n        }\n    }\n\
-    \    int q;cin>>q;\n    for(int i=0;i<q;i++){\n        int s,t;cin>>s>>t;\n  \
-    \      cout << (num[s] == num[t]) << endl;\n    }\n}\n"
-  code: "# define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_3_C\"\
-    \n# include \"SCC.hpp\"\n\nint main(){\n    int n,m;\n    cin >> n >> m;\n   \
-    \ Graph g(n);\n    for(int i=0;i<m;i++){\n        int a,b;\n        cin >> a >>\
-    \ b;\n        g[a].push_back(b);\n    }\n    StronglyConnectedComponents scc(g);\n\
-    \    vector<int> num(n,-1); //\u3069\u306E\u5F37\u9023\u7D50\u6210\u5206\u306B\
-    \u542B\u307E\u308C\u3066\u3044\u308B\u304B\n    for(int i=0;i<(int)scc.groups.size();i++){\n\
-    \        for(auto&v:scc.groups[i]){\n            num[v] = i;\n        }\n    }\n\
-    \    int q;cin>>q;\n    for(int i=0;i<q;i++){\n        int s,t;cin>>s>>t;\n  \
-    \      cout << (num[s] == num[t]) << endl;\n    }\n}\n"
+    \ scc(g);\n    cout << scc.groups.size() << endl;\n    for(int i=0;i<(int)scc.groups.size();i++){\n\
+    \        cout << scc.groups[i].size();\n        for(int v:scc.groups[i]){\n  \
+    \          cout << \" \" << v;\n        }\n        cout << endl;\n    }\n}\n"
+  code: "# define PROBLEM \"https://judge.yosupo.jp/problem/scc\"\n# include \"SCC.hpp\"\
+    \n\nint main(){\n    int n,m;\n    cin >> n >> m;\n    Graph g(n);\n    for(int\
+    \ i=0;i<m;i++){\n        int a,b;\n        cin >> a >> b;\n        g[a].push_back(b);\n\
+    \    }\n    StronglyConnectedComponents scc(g);\n    cout << scc.groups.size()\
+    \ << endl;\n    for(int i=0;i<(int)scc.groups.size();i++){\n        cout << scc.groups[i].size();\n\
+    \        for(int v:scc.groups[i]){\n            cout << \" \" << v;\n        }\n\
+    \        cout << endl;\n    }\n}\n"
   dependsOn:
   - Graph/SCC.hpp
   - templete.hpp
   isVerificationFile: true
   path: Graph/SCC.test.cpp
   requiredBy: []
-  timestamp: '2023-11-17 03:21:39+09:00'
+  timestamp: '2023-12-30 18:30:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Graph/SCC.test.cpp

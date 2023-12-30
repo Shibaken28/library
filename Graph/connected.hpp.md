@@ -5,20 +5,17 @@ data:
     path: templete.hpp
     title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: Math/Number-Theory/euler.hpp
-    title: "Euler's Phi Function / \u30AA\u30A4\u30E9\u30FC\u306E\u30D5\u30A1\u30A4\
-      \u95A2\u6570"
+  - icon: ':x:'
+    path: Graph/twoEdgeConnected.hpp
+    title: "Two Edge Connected Components / \u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\
+      \u5206\u89E3"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: Math/Number-Theory/euler.test.cpp
-    title: Math/Number-Theory/euler.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: Math/Number-Theory/prime-factorize.test.cpp
-    title: Math/Number-Theory/prime-factorize.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: Graph/twoEdgeConnected.test.cpp
+    title: Graph/twoEdgeConnected.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"templete.hpp\"\n\n#include <iostream> // cout, endl, cin\n\
@@ -54,46 +51,46 @@ data:
     \ endl; }\n \ntemplate <typename Head, typename... Tail>\nvoid print(Head H, Tail...\
     \ T) {\n  cout << H << \" \";\n  print(T...);\n}\n\n\ntemplate<class T> std::istream\
     \ &operator>>(std::istream &in,vector<T>&A){\n    for(T&a:A){\n        std::cin>>a;\n\
-    \    }\n    return in;\n}\n\n#line 2 \"Math/Number-Theory/prime-factorize.hpp\"\
-    \n\n//\u7D20\u56E0\u6570\u5206\u89E3\nvector<long> factor(long x){\n    vector<long>\
-    \ f(0);\n    for(long i=2;i*i<=x;i++){\n        if(x%i==0){\n            f.push_back(i);\n\
-    \            x/=i;\n            i--;\n        }\n    }\n    if(x>1)f.push_back(x);\n\
-    \    return f;\n}\n\n//\u7D20\u56E0\u6570\u5206\u89E32\n// (\u7D20\u6570,\u6307\
-    \u6570) \u306Epair\nvector<pair<long,long>> factor2(long x){\n    auto f = factor(x);\n\
-    \    vector<pair<long,long>> f2(0);\n    for(auto a:f){\n        if(f2.empty()){\n\
-    \            f2.push_back({a,1});\n        }else if(f2.back().first==a){\n   \
-    \         f2.back().second ++;\n        }else{\n            f2.push_back({a,1});\n\
-    \        }\n    }\n    return f2;\n}\n"
-  code: "# include \"templete.hpp\"\n\n//\u7D20\u56E0\u6570\u5206\u89E3\nvector<long>\
-    \ factor(long x){\n    vector<long> f(0);\n    for(long i=2;i*i<=x;i++){\n   \
-    \     if(x%i==0){\n            f.push_back(i);\n            x/=i;\n          \
-    \  i--;\n        }\n    }\n    if(x>1)f.push_back(x);\n    return f;\n}\n\n//\u7D20\
-    \u56E0\u6570\u5206\u89E32\n// (\u7D20\u6570,\u6307\u6570) \u306Epair\nvector<pair<long,long>>\
-    \ factor2(long x){\n    auto f = factor(x);\n    vector<pair<long,long>> f2(0);\n\
-    \    for(auto a:f){\n        if(f2.empty()){\n            f2.push_back({a,1});\n\
-    \        }else if(f2.back().first==a){\n            f2.back().second ++;\n   \
-    \     }else{\n            f2.push_back({a,1});\n        }\n    }\n    return f2;\n\
-    }\n"
+    \    }\n    return in;\n}\n\n#line 2 \"Graph/connected.hpp\"\n\nusing Graph =\
+    \ vector<vector<int>>;\n\n// \u9023\u7D50\u6210\u5206\u3092\u6C42\u3081\u308B\n\
+    struct ConnectedComponents{\n    int v;\n    vector<vector<int>> groups;\n   \
+    \ vector<int> id;\n    Graph &G;\n    ConnectedComponents(Graph &G) : G(G) {\n\
+    \        v = (int)G.size();\n        id.resize(v, -1);\n        int k = 0;\n \
+    \       for(int i = 0; i < v; i++){\n            if(id[i] == -1){\n          \
+    \      vector<int> group;\n                dfs(i, k, group);\n               \
+    \ k++;\n                groups.push_back(group);\n            }\n        }\n \
+    \   }\n\n    void dfs(int n, int k, vector<int> &group){\n        id[n] = k;\n\
+    \        group.push_back(n);\n        for(auto& e : G[n]){\n            if(id[e]\
+    \ == -1) dfs(e, k, group);\n        }\n    }\n};\n"
+  code: "# include \"templete.hpp\"\n\nusing Graph = vector<vector<int>>;\n\n// \u9023\
+    \u7D50\u6210\u5206\u3092\u6C42\u3081\u308B\nstruct ConnectedComponents{\n    int\
+    \ v;\n    vector<vector<int>> groups;\n    vector<int> id;\n    Graph &G;\n  \
+    \  ConnectedComponents(Graph &G) : G(G) {\n        v = (int)G.size();\n      \
+    \  id.resize(v, -1);\n        int k = 0;\n        for(int i = 0; i < v; i++){\n\
+    \            if(id[i] == -1){\n                vector<int> group;\n          \
+    \      dfs(i, k, group);\n                k++;\n                groups.push_back(group);\n\
+    \            }\n        }\n    }\n\n    void dfs(int n, int k, vector<int> &group){\n\
+    \        id[n] = k;\n        group.push_back(n);\n        for(auto& e : G[n]){\n\
+    \            if(id[e] == -1) dfs(e, k, group);\n        }\n    }\n};"
   dependsOn:
   - templete.hpp
   isVerificationFile: false
-  path: Math/Number-Theory/prime-factorize.hpp
+  path: Graph/connected.hpp
   requiredBy:
-  - Math/Number-Theory/euler.hpp
-  timestamp: '2023-11-14 13:45:06+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  - Graph/twoEdgeConnected.hpp
+  timestamp: '2023-12-30 18:30:06+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - Math/Number-Theory/euler.test.cpp
-  - Math/Number-Theory/prime-factorize.test.cpp
-documentation_of: Math/Number-Theory/prime-factorize.hpp
+  - Graph/twoEdgeConnected.test.cpp
+documentation_of: Graph/connected.hpp
 layout: document
-title: "prime factorize/ \u7D20\u56E0\u6570\u5206\u89E3"
+title: "Connected Components / \u9023\u7D50\u6210\u5206\u5206\u89E3"
 ---
 
 ## 概要
-素因数分解を行います。
-昇順の素数のリストを返します。
+グラフを連結成分に分解します。
 
 ## 計算量
-$O(\sqrt{n})$
+頂点数$N$、辺数$M$として、$O(N+M)$
+
 

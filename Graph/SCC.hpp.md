@@ -102,8 +102,8 @@ data:
   timestamp: '2023-11-17 03:21:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Graph/SCC.test.cpp
   - Graph/2SAT.test.cpp
+  - Graph/SCC.test.cpp
 documentation_of: Graph/SCC.hpp
 layout: document
 title: "Strongly Connected Components / \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"

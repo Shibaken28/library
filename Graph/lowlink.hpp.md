@@ -4,17 +4,24 @@ data:
   - icon: ':question:'
     path: templete.hpp
     title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':x:'
+    path: Graph/twoEdgeConnected.hpp
+    title: "Two Edge Connected Components / \u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\
+      \u5206\u89E3"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/articulation.test.cpp
     title: Graph/articulation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/bridge.test.cpp
     title: Graph/bridge.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: Graph/twoEdgeConnected.test.cpp
+    title: Graph/twoEdgeConnected.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"templete.hpp\"\n\n#include <iostream> // cout, endl, cin\n\
@@ -63,21 +70,23 @@ data:
     \u3053\u3068\u306B\u306A\u308B(\u30EB\u30FC\u30D7\u304C\u8907\u6570\u91CD\u306A\
     \u3063\u3066\u3044\u308B\u5834\u5408\u3082\u306A\u3093\u304B\u3044\u3044\u304B\
     \u3093\u3058\u306E\u6319\u52D5\u306B\u306A\u308B)\n    vector<int> articulation;\n\
-    \    vector<pair<int, int>> bridge;\n    Graph &G;\n    Lowlink(Graph &G) : G(G)\
-    \ {\n        v = (int)G.size();\n        ord.resize(v, -1);\n        low.resize(v,\
-    \ -1);\n        for(int i = 0; i < v; i++){\n            if(ord[i] == -1) dfs(i,\
-    \ -1, 0);\n        }\n    }\n    int dfs(int n, int par, int c){\n        ord[n]\
-    \ = c++;\n        low[n] = ord[n];\n        bool is_articulation = false;\n  \
-    \      int cnt = 0; // \u5B50\u306E\u6570\n        for(auto& e : G[n]){\n    \
-    \        if(ord[e] == -1){\n                cnt++;\n                c = dfs(e,\
-    \ n, c);\n                low[n] = min(low[n], low[e]); //low\u3092\u4F1D\u642C\
-    \n                if(par != -1 && ord[n] <= low[e]) is_articulation = true; //\u95A2\
-    \u7BC0\u70B9\n                if(ord[n] < low[e]) bridge.push_back({min(n, e),\
-    \ max(n, e)}); //\u6A4B\n            }else if(e != par){ //\u5F8C\u9000\u8FBA\n\
-    \                low[n] = min(low[n], ord[e]); //\u30EB\u30FC\u30D7\u691C\u51FA\
-    \n            }\n        }\n        if(par == -1 && cnt > 1) is_articulation =\
-    \ true; //\u6839\n        if(is_articulation) articulation.push_back(n);\n   \
-    \     return c;\n    }\n};\n\n"
+    \    vector<pair<int, int>> bridge;\n    vector<vector<bool>> used;    \n    Graph\
+    \ &G;\n    Lowlink(Graph &G) : G(G) {\n        v = (int)G.size();\n        ord.resize(v,\
+    \ -1);\n        low.resize(v, -1);\n        for(int i=0;i<v;i++) used.push_back(vector<bool>(v,\
+    \ false));\n        for(int i = 0; i < v; i++){\n            if(ord[i] == -1)\
+    \ dfs(i, -1, 0);\n        }\n    }\n    int dfs(int n, int par, int c){\n    \
+    \    ord[n] = c++;\n        low[n] = ord[n];\n        bool is_articulation = false;\n\
+    \        int cnt = 0; // \u5B50\u306E\u6570\n        for(int i=0;i<(int)G[n].size();i++){\n\
+    \            int e = G[n][i];\n            if(!used[n][i]){\n                used[n][i]\
+    \ = true;\n                cnt++;\n                c = dfs(e, n, c);\n       \
+    \         low[n] = min(low[n], low[e]); //low\u3092\u4F1D\u642C\n            \
+    \    if(par != -1 && ord[n] <= low[e]) is_articulation = true; //\u95A2\u7BC0\u70B9\
+    \n                if(ord[n] < low[e]) bridge.push_back({min(n, e), max(n, e)});\
+    \ //\u6A4B\n            }else if(e != par){ //\u5F8C\u9000\u8FBA\n           \
+    \     low[n] = min(low[n], ord[e]); //\u30EB\u30FC\u30D7\u691C\u51FA\n       \
+    \     }\n        }\n        if(par == -1 && cnt > 1) is_articulation = true; //\u6839\
+    \n        if(is_articulation) articulation.push_back(n);\n        return c;\n\
+    \    }\n};\n"
   code: "# include \"templete.hpp\"\n\nusing Graph = vector<vector<int>>;\n\n// \u6A4B\
     \u3068\u95A2\u7BC0\u70B9\u3092\u6C42\u3081\u308B\nstruct Lowlink{\n    int v;\n\
     \    vector<int> ord, low;\n    // ord[i] := \u9802\u70B9i\u306Bdfs\u3067\u8A2A\
@@ -91,31 +100,35 @@ data:
     \u3068\u306B\u306A\u308B(\u30EB\u30FC\u30D7\u304C\u8907\u6570\u91CD\u306A\u3063\
     \u3066\u3044\u308B\u5834\u5408\u3082\u306A\u3093\u304B\u3044\u3044\u304B\u3093\
     \u3058\u306E\u6319\u52D5\u306B\u306A\u308B)\n    vector<int> articulation;\n \
-    \   vector<pair<int, int>> bridge;\n    Graph &G;\n    Lowlink(Graph &G) : G(G)\
-    \ {\n        v = (int)G.size();\n        ord.resize(v, -1);\n        low.resize(v,\
-    \ -1);\n        for(int i = 0; i < v; i++){\n            if(ord[i] == -1) dfs(i,\
-    \ -1, 0);\n        }\n    }\n    int dfs(int n, int par, int c){\n        ord[n]\
-    \ = c++;\n        low[n] = ord[n];\n        bool is_articulation = false;\n  \
-    \      int cnt = 0; // \u5B50\u306E\u6570\n        for(auto& e : G[n]){\n    \
-    \        if(ord[e] == -1){\n                cnt++;\n                c = dfs(e,\
-    \ n, c);\n                low[n] = min(low[n], low[e]); //low\u3092\u4F1D\u642C\
-    \n                if(par != -1 && ord[n] <= low[e]) is_articulation = true; //\u95A2\
-    \u7BC0\u70B9\n                if(ord[n] < low[e]) bridge.push_back({min(n, e),\
-    \ max(n, e)}); //\u6A4B\n            }else if(e != par){ //\u5F8C\u9000\u8FBA\n\
-    \                low[n] = min(low[n], ord[e]); //\u30EB\u30FC\u30D7\u691C\u51FA\
-    \n            }\n        }\n        if(par == -1 && cnt > 1) is_articulation =\
-    \ true; //\u6839\n        if(is_articulation) articulation.push_back(n);\n   \
-    \     return c;\n    }\n};\n\n"
+    \   vector<pair<int, int>> bridge;\n    vector<vector<bool>> used;    \n    Graph\
+    \ &G;\n    Lowlink(Graph &G) : G(G) {\n        v = (int)G.size();\n        ord.resize(v,\
+    \ -1);\n        low.resize(v, -1);\n        for(int i=0;i<v;i++) used.push_back(vector<bool>(v,\
+    \ false));\n        for(int i = 0; i < v; i++){\n            if(ord[i] == -1)\
+    \ dfs(i, -1, 0);\n        }\n    }\n    int dfs(int n, int par, int c){\n    \
+    \    ord[n] = c++;\n        low[n] = ord[n];\n        bool is_articulation = false;\n\
+    \        int cnt = 0; // \u5B50\u306E\u6570\n        for(int i=0;i<(int)G[n].size();i++){\n\
+    \            int e = G[n][i];\n            if(!used[n][i]){\n                used[n][i]\
+    \ = true;\n                cnt++;\n                c = dfs(e, n, c);\n       \
+    \         low[n] = min(low[n], low[e]); //low\u3092\u4F1D\u642C\n            \
+    \    if(par != -1 && ord[n] <= low[e]) is_articulation = true; //\u95A2\u7BC0\u70B9\
+    \n                if(ord[n] < low[e]) bridge.push_back({min(n, e), max(n, e)});\
+    \ //\u6A4B\n            }else if(e != par){ //\u5F8C\u9000\u8FBA\n           \
+    \     low[n] = min(low[n], ord[e]); //\u30EB\u30FC\u30D7\u691C\u51FA\n       \
+    \     }\n        }\n        if(par == -1 && cnt > 1) is_articulation = true; //\u6839\
+    \n        if(is_articulation) articulation.push_back(n);\n        return c;\n\
+    \    }\n};\n"
   dependsOn:
   - templete.hpp
   isVerificationFile: false
   path: Graph/lowlink.hpp
-  requiredBy: []
-  timestamp: '2023-11-16 21:58:22+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  requiredBy:
+  - Graph/twoEdgeConnected.hpp
+  timestamp: '2023-12-30 18:30:06+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - Graph/bridge.test.cpp
+  - Graph/twoEdgeConnected.test.cpp
   - Graph/articulation.test.cpp
+  - Graph/bridge.test.cpp
 documentation_of: Graph/lowlink.hpp
 layout: document
 title: "Lowlink / \u30B0\u30E9\u30D5\u306E\u95A2\u7BC0\u70B9\u30FB\u6A4B\u306E\u691C\

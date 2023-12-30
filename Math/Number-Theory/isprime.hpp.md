@@ -27,8 +27,8 @@ data:
   timestamp: '2023-11-13 15:54:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Math/Number-Theory/isprime.test.cpp
   - Math/Number-Theory/enum-prme.test.cpp
+  - Math/Number-Theory/isprime.test.cpp
 documentation_of: Math/Number-Theory/isprime.hpp
 layout: document
 title: "is prime / \u7D20\u6570\u5224\u5B9A"

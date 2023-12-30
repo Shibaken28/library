@@ -46,7 +46,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/UnionFind.hpp
     title: UnionFind
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: Graph/connected.hpp
+    title: "Connected Components / \u9023\u7D50\u6210\u5206\u5206\u89E3"
+  - icon: ':x:'
     path: Graph/lowlink.hpp
     title: "Lowlink / \u30B0\u30E9\u30D5\u306E\u95A2\u7BC0\u70B9\u30FB\u6A4B\u306E\
       \u691C\u51FA"
@@ -59,6 +62,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/treeWalk.hpp
     title: "Tree Walk / \u4E8C\u5206\u6728\u306E\u5DE1\u56DE"
+  - icon: ':x:'
+    path: Graph/twoEdgeConnected.hpp
+    title: "Two Edge Connected Components / \u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\
+      \u5206\u89E3"
   - icon: ':heavy_check_mark:'
     path: Math/Combination/combination.hpp
     title: Math/Combination/combination.hpp
@@ -139,10 +146,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/UnionFind.test.cpp
     title: Graph/UnionFind.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/articulation.test.cpp
     title: Graph/articulation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/bridge.test.cpp
     title: Graph/bridge.test.cpp
   - icon: ':x:'
@@ -154,6 +161,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/treeWalk.test.cpp
     title: Graph/treeWalk.test.cpp
+  - icon: ':x:'
+    path: Graph/twoEdgeConnected.test.cpp
+    title: Graph/twoEdgeConnected.test.cpp
   - icon: ':heavy_check_mark:'
     path: Math/Combination/combination.test.cpp
     title: Math/Combination/combination.test.cpp
@@ -261,66 +271,69 @@ data:
   isVerificationFile: false
   path: templete.hpp
   requiredBy:
-  - Graph/LCA.hpp
-  - Graph/Kruskal.hpp
-  - Graph/treeWalk.hpp
+  - Uncategorized/date.hpp
+  - Sample/add.hpp
+  - Math/Linear/Matrix.hpp
+  - Math/Number-Theory/enum-prime.hpp
+  - Math/Number-Theory/euler.hpp
+  - Math/Number-Theory/GCD.hpp
+  - Math/Number-Theory/CRT.hpp
+  - Math/Number-Theory/prime-factorize.hpp
+  - Math/Number-Theory/divisor.hpp
+  - Math/Combination/pascal.hpp
+  - Math/Combination/combination.hpp
+  - Math/Mod/inverse.hpp
+  - Data-Structure/BIT.hpp
+  - Data-Structure/cumulative.hpp
+  - Data-Structure/cumulative2D.hpp
+  - Enumerate/permutations.hpp
+  - Graph/UnionFind.hpp
   - Graph/Prim.hpp
   - Graph/lowlink.hpp
   - Graph/Bellman-Ford.hpp
-  - Graph/UnionFind.hpp
-  - Graph/2SAT.hpp
-  - Graph/topological.hpp
-  - Graph/SCC.hpp
   - Graph/treeDiameter.hpp
   - Graph/Dijkstra.hpp
+  - Graph/twoEdgeConnected.hpp
+  - Graph/LCA.hpp
+  - Graph/Kruskal.hpp
+  - Graph/topological.hpp
+  - Graph/connected.hpp
+  - Graph/SCC.hpp
+  - Graph/treeWalk.hpp
+  - Graph/2SAT.hpp
   - Graph/Floyd-Warshall.hpp
-  - Math/Linear/Matrix.hpp
-  - Math/Number-Theory/CRT.hpp
-  - Math/Number-Theory/GCD.hpp
-  - Math/Number-Theory/euler.hpp
-  - Math/Number-Theory/prime-factorize.hpp
-  - Math/Number-Theory/divisor.hpp
-  - Math/Number-Theory/enum-prime.hpp
-  - Math/Mod/inverse.hpp
-  - Math/Combination/combination.hpp
-  - Math/Combination/pascal.hpp
-  - Uncategorized/date.hpp
-  - Enumerate/permutations.hpp
-  - Data-Structure/BIT.hpp
-  - Data-Structure/cumulative2D.hpp
-  - Data-Structure/cumulative.hpp
-  - Sample/add.hpp
   timestamp: '2023-11-14 13:45:06+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - Graph/UnionFind.test.cpp
-  - Graph/Bellman-Ford.test.cpp
-  - Graph/SCC.test.cpp
-  - Graph/Dijkstra.test.cpp
-  - Graph/2SAT.test.cpp
-  - Graph/topological.test.cpp
-  - Graph/treeDiameter.test.cpp
-  - Graph/treeWalk.test.cpp
-  - Graph/LCA.test.cpp
-  - Graph/Kruskal.test.cpp
-  - Graph/bridge.test.cpp
-  - Graph/Floyd-Warshall.test.cpp
-  - Graph/articulation.test.cpp
-  - Graph/Prim.test.cpp
+  - Sample/add.test.cpp
   - Math/Linear/Matrix.test.cpp
-  - Math/Number-Theory/GCD.test.cpp
-  - Math/Number-Theory/CRT.test.cpp
-  - Math/Number-Theory/prime-factorize.test.cpp
-  - Math/Number-Theory/enum-prme.test.cpp
   - Math/Number-Theory/LCM.test.cpp
+  - Math/Number-Theory/GCD.test.cpp
+  - Math/Number-Theory/enum-prme.test.cpp
+  - Math/Number-Theory/CRT.test.cpp
   - Math/Number-Theory/euler.test.cpp
   - Math/Number-Theory/divisor.test.cpp
+  - Math/Number-Theory/prime-factorize.test.cpp
   - Math/Combination/combination.test.cpp
-  - Enumerate/permutations.test.cpp
   - Data-Structure/cumulative.test.cpp
   - Data-Structure/cumulative2D.test.cpp
   - Data-Structure/BIT.test.cpp
-  - Sample/add.test.cpp
+  - Enumerate/permutations.test.cpp
+  - Graph/twoEdgeConnected.test.cpp
+  - Graph/Bellman-Ford.test.cpp
+  - Graph/articulation.test.cpp
+  - Graph/treeWalk.test.cpp
+  - Graph/topological.test.cpp
+  - Graph/UnionFind.test.cpp
+  - Graph/Prim.test.cpp
+  - Graph/Dijkstra.test.cpp
+  - Graph/2SAT.test.cpp
+  - Graph/SCC.test.cpp
+  - Graph/bridge.test.cpp
+  - Graph/Floyd-Warshall.test.cpp
+  - Graph/treeDiameter.test.cpp
+  - Graph/LCA.test.cpp
+  - Graph/Kruskal.test.cpp
 documentation_of: templete.hpp
 layout: document
 title: "templete / \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
