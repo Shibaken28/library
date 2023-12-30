@@ -1,4 +1,4 @@
-# define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_3_C"
+# define PROBLEM "https://judge.yosupo.jp/problem/scc"
 # include "SCC.hpp"
 
 int main(){
@@ -11,15 +11,12 @@ int main(){
         g[a].push_back(b);
     }
     StronglyConnectedComponents scc(g);
-    vector<int> num(n,-1); //どの強連結成分に含まれているか
+    cout << scc.groups.size() << endl;
     for(int i=0;i<(int)scc.groups.size();i++){
-        for(auto&v:scc.groups[i]){
-            num[v] = i;
+        cout << scc.groups[i].size();
+        for(int v:scc.groups[i]){
+            cout << " " << v;
         }
-    }
-    int q;cin>>q;
-    for(int i=0;i<q;i++){
-        int s,t;cin>>s>>t;
-        cout << (num[s] == num[t]) << endl;
+        cout << endl;
     }
 }

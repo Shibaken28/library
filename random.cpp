@@ -1,4 +1,5 @@
-#line 1 "Graph/SCC.test.cpp"
+#line 1 "Graph/topological.test.cpp"
+# define IGNORE
 #line 2 "templete.hpp"
 
 #include <iostream> // cout, endl, cin
@@ -115,65 +116,41 @@ template<class T> std::istream &operator>>(std::istream &in,vector<T>&A){
     return in;
 }
 
-#line 2 "Graph/SCC.hpp"
+#line 2 "Graph/topological.hpp"
 
 using Graph = vector<vector<int>>;
-struct StronglyConnectedComponents{
-    Graph &G;
-    Graph invG;
-    vector<int> ord, visit, inv;
-    vector<vector<int>> groups;
-    StronglyConnectedComponents(Graph &_G): G(_G){
-        int v = (int)G.size();
-        invG.resize(v);
-        for(int i=0;i<v;i++){
-            for(auto&g:G[i]){
-                invG[g].push_back(i);
-            }
+// グラフがDAGである
+// トポロジカルソート
+vector<int> topologicalSort(Graph &G){
+    // 入次数を数える
+    vector<int> in(G.size(),0);
+    for(auto&g:G){
+        for(auto&h:g){
+            in[h]++;
         }
-        // DFSをする
-        ord.resize(v, -1);
-        inv.resize(v, -1);
-        visit.resize(v, 0);
-        int k = 0;
-        for(int i=0;i<v;i++){
-            if(ord[i]==-1)k = dfs(i, k);
+    }
+    // 入次数が0のものをキューに入れる
+    queue<int> q;
+    for(int i=0;i<(int)G.size();i++){
+        if(in[i]==0){
+            q.push(i);
         }
-        for(int i=0;i<v;i++){
-            inv[ord[i]] = i;
-            ord[i] = -1;
-        }
-        // 辺を逆向きにしてDFS
-        k = 0;
-        for(int i=v-1;i>=0;i--){
-            if(ord[inv[i]]==-1){
-                vector<int> group(0);
-                k = dfs2(inv[i], k, group);
-                groups.push_back(group);  
+    }
+    // 入次数が0のものを取り出して、その頂点から出ている辺を削除する
+    vector<int> ans;
+    while(!q.empty()){
+        int n=q.front(); q.pop();
+        ans.push_back(n);
+        for(auto&g:G[n]){
+            in[g]--;
+            if(in[g]==0){
+                q.push(g);
             }
         }
     }
-    int dfs(int n, int k){
-        if(visit[n])return k;
-        visit[n] = 1;
-        for(auto&e:G[n]){
-            k = dfs(e, k);
-        }
-        ord[n] = k++;
-        return k;
-    }
-    int dfs2(int n,int k, vector<int>&group){
-        group.push_back(n);
-        ord[n] = k++;
-        for(auto&e:invG[n]){
-            if(ord[e]==-1){
-                k = dfs2(e, k, group);
-            }
-        }
-        return k;
-    }
-};
-#line 3 "Graph/SCC.test.cpp"
+    return ans;
+}
+#line 4 "Graph/topological.test.cpp"
 
 int main(){
     int n,m;
@@ -184,16 +161,8 @@ int main(){
         cin >> a >> b;
         g[a].push_back(b);
     }
-    StronglyConnectedComponents scc(g);
-    vector<int> num(n,-1); //どの強連結成分に含まれているか
-    for(int i=0;i<(int)scc.groups.size();i++){
-        for(auto&v:scc.groups[i]){
-            num[v] = i;
-        }
-    }
-    int q;cin>>q;
-    for(int i=0;i<q;i++){
-        int s,t;cin>>s>>t;
-        cout << (num[s] == num[t]) << endl;
+    auto ans=topologicalSort(g);
+    for(auto&h:ans){
+        cout << h << endl;
     }
 }

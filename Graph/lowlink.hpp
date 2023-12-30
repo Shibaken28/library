@@ -11,11 +11,13 @@ struct Lowlink{
     // * すなわち、後退辺=ループが見つかると、そのループ内のlowに同じ数字を割り当てていくことになる(ループが複数重なっている場合もなんかいいかんじの挙動になる)
     vector<int> articulation;
     vector<pair<int, int>> bridge;
+    vector<vector<bool>> used;    
     Graph &G;
     Lowlink(Graph &G) : G(G) {
         v = (int)G.size();
         ord.resize(v, -1);
         low.resize(v, -1);
+        for(int i=0;i<v;i++) used.push_back(vector<bool>(v, false));
         for(int i = 0; i < v; i++){
             if(ord[i] == -1) dfs(i, -1, 0);
         }
@@ -25,8 +27,10 @@ struct Lowlink{
         low[n] = ord[n];
         bool is_articulation = false;
         int cnt = 0; // 子の数
-        for(auto& e : G[n]){
-            if(ord[e] == -1){
+        for(int i=0;i<(int)G[n].size();i++){
+            int e = G[n][i];
+            if(!used[n][i]){
+                used[n][i] = true;
                 cnt++;
                 c = dfs(e, n, c);
                 low[n] = min(low[n], low[e]); //lowを伝搬
@@ -41,4 +45,3 @@ struct Lowlink{
         return c;
     }
 };
-
